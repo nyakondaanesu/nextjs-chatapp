@@ -1,35 +1,23 @@
 "use client";
 import { useEffect, useId, useState } from "react";
 import { io } from "socket.io-client";
+import useSocket from "./(customHooks)/customHook";
 
 export default function Home() {
-  const [userID, setUserId] = useState("");
-  const [socket, setSocket] = useState<ReturnType<typeof io> | null>(null);
   const [inputValue, setInputValue] = useState("");
+  const [messageReceived, setMessageReceived] = useState("message here:");
+  const { socket, userID } = useSocket();
 
-  useEffect(() => {
-    const newSocket = io("http://localhost:3000", {
-      transports: ["websocket"],
-      reconnection: true,
-      reconnectionAttempts: 5,
-    });
-
-    setSocket(newSocket as any);
-
-    newSocket.on("connect", () => {
-      setUserId(newSocket.id as string);
-      console.log(`user ${newSocket.id} has connected`);
-    });
-
-    // Cleanup on component unmount
-    return () => {
-      newSocket.close();
-    };
-  }, []);
   const handleSubmit = (e: { preventDefault: any }) => {
     e.preventDefault();
     socket?.emit("hello", inputValue);
   };
+
+  useEffect(() => {
+    socket?.on("hello", (dataMessage) => {
+      setMessageReceived(dataMessage);
+    });
+  }, [socket]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -38,12 +26,19 @@ export default function Home() {
     <>
       {" "}
       this is my {userID}
+      <p>{messageReceived}</p>
       <input
+        className="rounded-lg text-black mt-10"
         placeholder="type message here"
         onChange={handleChange}
         value={inputValue}
       />
-      <button onClick={handleSubmit}>send</button>
+      <button
+        onClick={handleSubmit}
+        className="bg-green-900 mx-5 px-5 rounded-lg"
+      >
+        send
+      </button>
     </>
   );
 }

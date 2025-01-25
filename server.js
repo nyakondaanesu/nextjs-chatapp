@@ -26,10 +26,12 @@ const startServer = async () => {
 
       socket.on("message", (data) => {
         // Handle incoming messages
-        io.emit("message", data); // Broadcast to all clients
+        socket.emit("message", data); // Broadcast to all clients
       });
 
-      socket.on("hello", (dataMessage) => console.log(dataMessage));
+      socket.on("hello", (dataMessage) => {
+        socket.broadcast.emit("hello", dataMessage);
+      });
 
       socket.on("disconnect", () => {
         console.log("Client disconnected");
