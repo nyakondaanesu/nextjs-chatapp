@@ -13,7 +13,7 @@ const useSocket = () => {
       reconnectionAttempts: 5,
     });
 
-    setSocket(newSocket as any);
+    setSocket(newSocket);
 
     newSocket.on("connect", () => {
       setUserId(newSocket.id as string);

@@ -1,21 +1,34 @@
 "use client";
-import { useEffect, useId, useState } from "react";
-import { io } from "socket.io-client";
+import { MouseEvent, useEffect, useState } from "react";
 import useSocket from "./(customHooks)/customHook";
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState("");
-  const [messageReceived, setMessageReceived] = useState("message here:");
-  const { socket, userID } = useSocket();
-
-  const handleSubmit = (e: { preventDefault: any }) => {
-    e.preventDefault();
-    socket?.emit("hello", inputValue);
+  type message = {
+    fromId: string;
+    actualMessage: string;
   };
 
+  const [inputValue, setInputValue] = useState("");
+  const [messageReceived, setMessageReceived] = useState<message[]>([]);
+
+  const { socket, userID } = useSocket();
+
+  //sending the message to the server
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const payload: message = {
+      fromId: userID,
+      actualMessage: inputValue,
+    };
+
+    socket?.emit("hello", payload);
+    setInputValue("");
+  };
+
+  // listening to the hello event
   useEffect(() => {
-    socket?.on("hello", (dataMessage) => {
-      setMessageReceived(dataMessage);
+    socket?.on("hello", (dataMessage: message) => {
+      setMessageReceived((prevMessages) => [...prevMessages, dataMessage]);
     });
   }, [socket]);
 
@@ -26,7 +39,20 @@ export default function Home() {
     <>
       {" "}
       this is my {userID}
-      <p>{messageReceived}</p>
+      <section className="flex">
+        <div className="">
+          {messageReceived?.map((message) => {
+            return (
+              <p
+                key={message.actualMessage}
+                className="bg-blue-900 rounded-md mt-5"
+              >
+                {message.actualMessage}
+              </p>
+            );
+          })}
+        </div>
+      </section>
       <input
         className="rounded-lg text-black mt-10"
         placeholder="type message here"
