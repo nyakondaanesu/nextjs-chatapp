@@ -6,6 +6,7 @@ export default function Home() {
   type message = {
     fromId: string;
     actualMessage: string;
+    timStamp?: string;
   };
 
   const [inputValue, setInputValue] = useState("");
@@ -21,6 +22,7 @@ export default function Home() {
       actualMessage: inputValue,
     };
 
+    setMessageReceived((prevMessage) => [...prevMessage, payload]); //add to the sent messages array
     socket?.emit("hello", payload);
     setInputValue("");
   };
@@ -30,6 +32,10 @@ export default function Home() {
     socket?.on("hello", (dataMessage: message) => {
       setMessageReceived((prevMessages) => [...prevMessages, dataMessage]);
     });
+
+    return () => {
+      socket?.off("hello");
+    };
   }, [socket]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,16 +45,26 @@ export default function Home() {
     <>
       {" "}
       this is my {userID}
-      <section className="flex">
-        <div className="">
-          {messageReceived?.map((message) => {
+      <section className="flex flex-col">
+        <div className="flex flex-col space-y-4">
+          {messageReceived?.map((message, index) => {
             return (
-              <p
-                key={message.actualMessage}
-                className="bg-blue-900 rounded-md mt-5"
+              <div
+                key={message.actualMessage + index}
+                className={`${
+                  message.fromId === userID
+                    ? "flex justify-end"
+                    : "flex justify-start"
+                }`}
               >
-                {message.actualMessage}
-              </p>
+                <p
+                  className={`${
+                    message.fromId === userID ? "bg-green-900" : "bg-blue-900"
+                  } text-white rounded-lg p-2`}
+                >
+                  {message.actualMessage}
+                </p>
+              </div>
             );
           })}
         </div>
