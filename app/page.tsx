@@ -17,9 +17,11 @@ export default function Home() {
   //sending the message to the server
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const time = new Date();
     const payload: message = {
       fromId: userID,
       actualMessage: inputValue,
+      timStamp: `${time.getHours()}: ${time.getMinutes()}`,
     };
 
     setMessageReceived((prevMessage) => [...prevMessage, payload]); //add to the sent messages array
@@ -53,17 +55,22 @@ export default function Home() {
                 key={message.actualMessage + index}
                 className={`${
                   message.fromId === userID
-                    ? "flex justify-end"
-                    : "flex justify-start"
-                }`}
+                    ? "flex justify-end "
+                    : "flex justify-start "
+                } `}
               >
-                <p
-                  className={`${
-                    message.fromId === userID ? "bg-green-900" : "bg-blue-900"
-                  } text-white rounded-lg p-2`}
-                >
-                  {message.actualMessage}
-                </p>
+                <div className="flex space-x-4 items-center">
+                  <p
+                    className={`${
+                      message.fromId === userID ? "bg-green-900" : "bg-blue-900"
+                    } text-white rounded-lg p-2 text-lg`}
+                  >
+                    {message.actualMessage}
+                    <span className="text-xs  justify-end">
+                      {message.timStamp}
+                    </span>
+                  </p>
+                </div>
               </div>
             );
           })}

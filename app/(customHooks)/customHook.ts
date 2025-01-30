@@ -5,6 +5,8 @@ import { io } from "socket.io-client";
 const useSocket = () => {
   const [userID, setUserId] = useState("");
   const [socket, setSocket] = useState<ReturnType<typeof io> | null>(null);
+  const [currentRoom, setCurrentRoom] = useState<string | null>(null);
+  // const [usersConnected, setUsersConnected] = use
 
   useEffect(() => {
     const newSocket = io("http://localhost:3000", {
