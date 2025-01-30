@@ -25,14 +25,16 @@ export default function Home() {
     };
 
     setMessageReceived((prevMessage) => [...prevMessage, payload]); //add to the sent messages array
-    socket?.emit("hello", payload);
+    socket?.emit("sendPrivateMessage", payload);
     setInputValue("");
   };
 
   // listening to the hello event
   useEffect(() => {
-    socket?.on("hello", (dataMessage: message) => {
+    console.log("hello");
+    socket?.on("receivePrivateMessage", (dataMessage: message) => {
       setMessageReceived((prevMessages) => [...prevMessages, dataMessage]);
+      console.log(`message reeceived ${dataMessage.actualMessage}`);
     });
 
     return () => {
@@ -43,10 +45,18 @@ export default function Home() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
+
+  const handleJoinRoom = () => {
+    //create a private room
+
+    socket?.emit("joinPrivateChat", socket.id);
+  };
+
   return (
     <>
       {" "}
       this is my {userID}
+      <button onClick={handleJoinRoom}>match make</button>
       <section className="flex flex-col">
         <div className="flex flex-col space-y-4">
           {messageReceived?.map((message, index) => {

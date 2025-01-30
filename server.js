@@ -68,31 +68,41 @@ const startServer = async () => {
           privateRooms.push(privateRoom);
           socket.join(privateRoom.id);
           console.log(
-            `${socket.id} has created private chat room ${privateRoom.id}`
+            `${socket.id} has created private chat room and joined that room too ${privateRoom.id}`
           );
         };
 
-        //check do we have a private room in the privateRooms array if we do add the user to the private room else create a private room
-        if (privateRooms.length > 0) {
-          const privateRoom = privateRooms[0];
+        const availableRoom = privateRooms.find(
+          (room) => room.users.length === 1
+        );
 
-          if (privateRoom.users.length === 2) {
-            //if the private room is full remove the private room from the privateRooms array
-            privateRooms = privateRooms.filter(
-              (item) => item.id !== privateRoom.id
-            );
-            createPrivateRoom();
-          } else {
-            // the room is not full add the user to the private room
-            privateRoom.addItem(socket.id);
-            console.log(`${socket.id} has joined ${privateRoom.id} room`);
-          }
-        } else if (privateRooms.length === 0) {
-          //if we dont have a private room create one
+        if (availableRoom) {
+          // Add the user to the available room
+          availableRoom.addItem(socket.id);
+          socket.join(availableRoom.id);
+          console.log(
+            `${socket.id} joined existing private room: ${availableRoom.id}`
+          );
+        } else {
+          // Create a new private room
           createPrivateRoom();
         }
+      });
 
-        //if we dont have a private room create one
+      //sending a message to a private chat room
+      socket.on("sendPrivateMessage", (data) => {
+        const userRoom = privateRooms.find((room) =>
+          room.users.includes(socket.id)
+        );
+
+        if (userRoom) {
+          console.log(
+            `${socket.id} sent a message to room ${userRoom.id}: ${data.actualMessage}`
+          );
+          socket.to(userRoom.id).emit("receivePrivateMessage", data);
+        } else {
+          console.error(`User ${socket.id} is not in any room.`);
+        }
       });
 
       socket.on("disconnect", () => {
