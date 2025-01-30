@@ -64,38 +64,30 @@ const startServer = async () => {
         const createPrivateRoom = () => {
           const privateRoom = new room(generateUniqueId());
 
-          if (privateRoom.getItems() === 2) {
-            //  2 users have joined the private room, create a new private room
-            console.log(`${privateRoom.id} is full`);
-          } else {
-            privateRoom.addItem(socket.id);
-            privateRooms.push(privateRoom);
-            socket.join(privateRoom);
-            console.log(
-              `${socket.id} has created private chat room ${privateRoom.id}`
-            );
-          }
+          privateRoom.addItem(socket.id);
+          privateRooms.push(privateRoom);
+          socket.join(privateRoom.id);
+          console.log(
+            `${socket.id} has created private chat room ${privateRoom.id}`
+          );
         };
 
-        //check do we have a private room in the privateRooms array
+        //check do we have a private room in the privateRooms array if we do add the user to the private room else create a private room
         if (privateRooms.length > 0) {
-          //if we do add the user to the private room
-
           const privateRoom = privateRooms[0];
 
-          //check if the private room is full
-          if (privateRoom.getItems() === 2) {
-            //if the private room is full, create a new private room
-            console.log(`${privateRoom.id} is full`);
+          if (privateRoom.users.length === 2) {
+            //if the private room is full remove the private room from the privateRooms array
+            privateRooms = privateRooms.filter(
+              (item) => item.id !== privateRoom.id
+            );
             createPrivateRoom();
           } else {
-            //if
+            // the room is not full add the user to the private room
             privateRoom.addItem(socket.id);
-            console.log(
-              ` this ${socket.id}  has joined private chat room ${privateRoom.id}`
-            );
+            console.log(`${socket.id} has joined ${privateRoom.id} room`);
           }
-        } else {
+        } else if (privateRooms.length === 0) {
           //if we dont have a private room create one
           createPrivateRoom();
         }
