@@ -18,46 +18,15 @@ const Chat = () => {
 
   return (
     <>
-      <section>
-        <div className="flex justify-between bg-red-900">
-          <span>
-            <label htmlFor="">Anesu Nyakonda</label>
-          </span>
-          <ul className="flex space-x-6">
-            <li>
-              <div className="">
-                <Image
-                  src="/space.svg"
-                  alt="Hero image"
-                  width={16}
-                  height={16}
-                />
-              </div>
-            </li>
-            <li>
-              <div className="">
-                <Image
-                  src="/chat.svg"
-                  alt="Hero image"
-                  width={16}
-                  height={16}
-                />
-              </div>
-            </li>
-            <li>
-              <div className="">
-                <Image
-                  src="/video.png"
-                  alt="Hero image"
-                  width={16}
-                  height={16}
-                />
-              </div>
-            </li>
-          </ul>
+      <section className="mx-6  bg-primary flex mt-10">
+        <div className="flex bg-accent min-h-dvh">
+          <nav className="flex space-x-10 mx-4">
+            <span className="text-white">Chat</span>
+            <span>Space</span>
+            <span>Video</span>
+          </nav>
         </div>
-
-        <button onClick={handleJoinRoom}>match make</button>
+        <div className="">chat room</div>
       </section>
     </>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +26,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
       >
+        <nav className="justify-between bg-secondary py-3 flex items-center">
+          <span className="flex space-x-2 items-center px-6">
+            <Image
+              src="/logoChat.png"
+              alt="Hero image"
+              width={48}
+              height={48}
+            />
+            <label htmlFor="" className="text-white">
+              Zimbo Chat
+            </label>
+          </span>
+          <div className="space-x-6 flex px-6">
+            <span className="bg-white text-black rounded-full p-2">
+              anesu nyakonda
+            </span>
+            <button className="text-white">Log Out</button>
+          </div>
+        </nav>
         {children}
       </body>
     </html>
