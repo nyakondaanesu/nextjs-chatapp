@@ -57,7 +57,7 @@ export default function Home() {
       {" "}
       this is my {userID}
       <button onClick={handleJoinRoom}>match make</button>
-      <section className="flex flex-col">
+      <section className="flex flex-col ">
         <div className="flex flex-col space-y-4">
           {messageReceived?.map((message, index) => {
             return (

@@ -18,15 +18,9 @@ const Chat = () => {
 
   return (
     <>
-      <section className="mx-6  bg-primary flex mt-10">
-        <div className="flex bg-accent min-h-dvh">
-          <nav className="flex space-x-10 mx-4">
-            <span className="text-white">Chat</span>
-            <span>Space</span>
-            <span>Video</span>
-          </nav>
-        </div>
-        <div className="">chat room</div>
+      <section className="mt-10 flex mx-5 h-[calc(100vh-128px)]">
+        <div className="bg-accent w-1/4">side panel</div>
+        <div className="bg-primary w-3/4 flex justify-center">chat room</div>
       </section>
     </>
   );
