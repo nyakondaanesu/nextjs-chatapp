@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 const useSocket = () => {
   const [userID, setUserId] = useState("");
   const [socket, setSocket] = useState<ReturnType<typeof io> | null>(null);
-  const [currentRoom, setCurrentRoom] = useState<string | null>(null);
+  const [inRoom, setInRoom] = useState<boolean | undefined>(undefined);
   // const [usersConnected, setUsersConnected] = use
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const useSocket = () => {
     };
   }, []);
 
-  return { socket, userID };
+  return { socket, userID, inRoom };
 };
 
 export default useSocket;

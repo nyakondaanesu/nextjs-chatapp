@@ -80,6 +80,7 @@ const startServer = async () => {
           // Add the user to the available room
           availableRoom.addItem(socket.id);
           socket.join(availableRoom.id);
+          io.to(availableRoom.id).emit("matchFound");
           console.log(
             `${socket.id} joined existing private room: ${availableRoom.id}`
           );
