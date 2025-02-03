@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
-import useSocket from "../(customHooks)/customHook";
+import useSocket from "@/app/(customHooks)/customHook";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import AppSideBar from "@/components/appSideBar";
-import MatchMakingSection from "@/components/matchMakingSection";
 
-const Chat = () => {
+const MatchMakingSection = () => {
   const { socket, userID } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
@@ -36,9 +35,28 @@ const Chat = () => {
 
   return (
     <>
-      <AppSideBar children={<MatchMakingSection />}></AppSideBar>
+      <div className="flex justify-center items-center h-screen">
+        {!isMatched && (
+          <button
+            onClick={handleJoinRoom}
+            disabled={isLoading} // Disable button while loading
+            className="text-black"
+          >
+            {isLoading ? "Searching for a match..." : "Match Make"}
+          </button>
+        )}
+
+        {isMatched && (
+          <div className="text-center space-y-5">
+            <p className="text-black text-3xl ">Match found ! </p>
+            <button className="bg-accent text-white rounded-md p-3">
+              start a conversation
+            </button>
+          </div>
+        )}
+      </div>
     </>
   );
 };
 
-export default Chat;
+export default MatchMakingSection;
