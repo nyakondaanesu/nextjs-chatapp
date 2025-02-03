@@ -34,6 +34,7 @@ const startServer = async () => {
 
     let queuedUsers = [];
     let privateRooms = [];
+
     await app.prepare();
     const server = express();
     const httpServer = createServer(server);

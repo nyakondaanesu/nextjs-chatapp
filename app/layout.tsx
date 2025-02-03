@@ -28,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white flex-col h-screen`}
       >
-        <nav className="justify-between bg-secondary py-3 flex items-center">
+        <nav className="justify-between bg-accent py-3 flex items-center">
           <span className="flex space-x-2 items-center px-6">
             <Image
               src="/logoChat.png"
