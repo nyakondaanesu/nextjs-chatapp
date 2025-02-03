@@ -1,15 +1,17 @@
 "use client";
-import Image from "next/image";
-import useSocket from "@/app/(customHooks)/customHook";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import AppSideBar from "@/components/appSideBar";
 
-const MatchMakingSection = () => {
+import useSocket from "@/app/(customHooks)/customHook";
+import React, { useEffect, useState } from "react";
+export let convo = false;
+
+const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   const { socket, userID } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
-  const [option, setOption] = useState("chat");
+  const [startConvo, setStartConvo] = useState(false);
+
+  convo = startConvo;
+  console.log(startConvo, convo);
 
   const handleJoinRoom = () => {
     if (socket) {
@@ -35,7 +37,7 @@ const MatchMakingSection = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
         {!isMatched && (
           <button
             onClick={handleJoinRoom}
@@ -46,14 +48,7 @@ const MatchMakingSection = () => {
           </button>
         )}
 
-        {isMatched && (
-          <div className="text-center space-y-5">
-            <p className="text-black text-3xl ">Match found ! </p>
-            <button className="bg-accent text-white rounded-md p-3">
-              start a conversation
-            </button>
-          </div>
-        )}
+        {isMatched && <div> {children}</div>}
       </div>
     </>
   );

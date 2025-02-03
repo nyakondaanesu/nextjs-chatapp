@@ -1,7 +1,8 @@
 "use client";
 import { MouseEvent, useEffect, useState } from "react";
-import useSocket from "../(customHooks)/customHook";
-const Messages = () => {
+import useSocket from "@/app/(customHooks)/customHook";
+
+export default function Messages() {
   type message = {
     fromId: string;
     actualMessage: string;
@@ -45,17 +46,8 @@ const Messages = () => {
     setInputValue(e.target.value);
   };
 
-  const handleJoinRoom = () => {
-    //create a private room
-
-    socket?.emit("joinPrivateChat", socket.id);
-  };
-
   return (
     <>
-      {" "}
-      this is my {userID}
-      <button onClick={handleJoinRoom}>match make</button>
       <section className="flex flex-col ">
         <div className="flex flex-col space-y-4">
           {messageReceived?.map((message, index) => {
@@ -95,10 +87,8 @@ const Messages = () => {
         onClick={handleSubmit}
         className="bg-green-900 mx-5 px-5 rounded-lg"
       >
-        send
+        send me
       </button>
     </>
   );
-};
-
-export default Messages;
+}
