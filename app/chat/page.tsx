@@ -6,7 +6,7 @@ const Chat = () => {
   return (
     <>
       <AppSideBar
-        children={<MatchMakingSection children={<Messages></Messages>} />}
+        children={<MatchMakingSection children={<Messages />} />}
       ></AppSideBar>
     </>
   );

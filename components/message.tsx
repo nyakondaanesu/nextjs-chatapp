@@ -1,18 +1,19 @@
 "use client";
 import { MouseEvent, useEffect, useState } from "react";
-import useSocket from "@/app/(customHooks)/customHook";
+import { getSocketInstance } from "../lib/socketInstance";
+import { getUserIdInstance } from "../lib/socketInstance";
 
 export default function Messages() {
+  const socket = getSocketInstance();
+  const userID = getUserIdInstance();
   type message = {
-    fromId: string;
+    fromId: string | null;
     actualMessage: string;
     timStamp?: string;
   };
 
   const [inputValue, setInputValue] = useState("");
   const [messageReceived, setMessageReceived] = useState<message[]>([]);
-
-  const { socket, userID } = useSocket();
 
   //sending the message to the server
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
@@ -66,7 +67,7 @@ export default function Messages() {
                       message.fromId === userID ? "bg-green-900" : "bg-blue-900"
                     } text-white rounded-lg p-2 text-lg`}
                   >
-                    {message.actualMessage}
+                    {message.actualMessage + message.fromId}
                     <span className="text-xs  justify-end">
                       {message.timStamp}
                     </span>
