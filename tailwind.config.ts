@@ -11,7 +11,7 @@ export default {
     extend: {
       colors: {
         purpleColor: "#25303A",
-        main: "#F5F5FF",
+        main: "#D7D7D7",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         secondary: {

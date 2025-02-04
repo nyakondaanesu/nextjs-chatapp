@@ -12,7 +12,7 @@ import React, { ReactNode, useState } from "react";
 import Link from "next/link";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
-  const [isSideOpen, setSideOpen] = useState(true);
+  const [isSideOpen, setSideOpen] = useState(false);
   const toggleSidebar = () => setSideOpen((prev) => !prev);
 
   return (
@@ -122,8 +122,8 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
 
               {/* Content below the sidebar */}
             </div>
-            <div className="bg-secondary mt-20 lg:hidden">
-              <SidebarGroup className="mt-10 space-y-6">
+            <div className="bg-accent mt-20 lg:hidden">
+              <SidebarGroup className="mt-10 space-y-6 mx-2">
                 <Link href={"/chat"} className="flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

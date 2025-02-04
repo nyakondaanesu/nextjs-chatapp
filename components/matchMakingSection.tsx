@@ -4,6 +4,7 @@ import useSocket from "@/app/(customHooks)/customHook";
 import { setSocketInstance } from "../lib/socketInstance";
 import { setUserIdInstance } from "../lib/socketInstance";
 import React, { useEffect, useState } from "react";
+import Loader from "./cluter";
 
 const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   const { socket } = useSocket();
@@ -42,13 +43,24 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
       {!isMatched && (
-        <button
-          onClick={handleJoinRoom}
-          disabled={isLoading} // Disable button while loading
-          className="text-black"
-        >
-          {isLoading ? "Searching for a match..." : "Match Make"}
-        </button>
+        <div className="flex flex-col items-center space-y-8">
+          <button
+            onClick={handleJoinRoom}
+            disabled={isLoading} // Disable button while loading
+            className={
+              isLoading
+                ? "text-black  "
+                : "text-white bg-purpleColor font-semi-bold py-2 px-4 rounded-lg"
+            }
+          >
+            {isLoading ? "Searching for a match..." : "Match Make"}
+          </button>
+          {isLoading && (
+            <div className="justify-center items-center">
+              <Loader />
+            </div>
+          )}
+        </div>
       )}
 
       {isMatched && <div className="w-full">{children}</div>}
