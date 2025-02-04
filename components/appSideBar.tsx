@@ -4,7 +4,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarHeader,
   SidebarProvider,
 } from "./ui/sidebar";
 import Image from "next/image";
@@ -47,9 +46,6 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
             </label>
           </div>
           <div className="space-x-6 flex px-6">
-            <span className="bg-white text-black rounded-full p-2">
-              anesu nyakonda
-            </span>
             <button className="text-white">Log Out</button>
           </div>
         </nav>
@@ -57,9 +53,8 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
         {/* Sidebar below the navbar */}
         {isSideOpen && (
           <>
-            <div className="flex hidden md:block">
-              {}
-              <Sidebar className="mt-16 h-[calc(100vh-4rem)] bg-purpleColor ">
+            <div className="flex ">
+              <Sidebar className="mt-16 h-[calc(100vh-4rem)] bg-purpleColor  ">
                 <SidebarContent>
                   <SidebarGroup className="mt-10 space-y-6">
                     <Link href={"/chat"} className="flex">
@@ -119,10 +114,9 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   <button className="text-black">Log Out</button>
                 </SidebarFooter>
               </Sidebar>
-
-              {/* Content below the sidebar */}
             </div>
-            <div className="bg-accent mt-20 lg:hidden">
+            {/* side bar on mobile*/}
+            <div className="bg-accent mt-20 lg:hidden h-[calc(100vh-4rem)] ">
               <SidebarGroup className="mt-10 space-y-6 mx-2">
                 <Link href={"/chat"} className="flex">
                   <svg
@@ -180,7 +174,9 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
           </>
         )}
 
-        <div className=" w-full mt-16 ">{children}</div>
+        <div className=" w-full mt-16 h-[calc(100vh-4rem)] overflow-y-scroll">
+          {children}
+        </div>
       </SidebarProvider>
     </>
   );

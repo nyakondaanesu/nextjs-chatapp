@@ -51,7 +51,7 @@ export default function Messages() {
   return (
     <>
       <>
-        <div className="flex-col flex h-[calc(100vh-16rem)] overflow-y-auto space-y-8 px-4">
+        <div className="flex-col flex h-[calc(100vh-14rem)] overflow-y-auto space-y-8 px-4">
           {messageReceived?.map((message, index) => {
             const isSentByUser = message.fromId === userID;
 
@@ -88,7 +88,7 @@ export default function Messages() {
           })}
         </div>
 
-        <div className="flex items-center p-4 gap-2">
+        <div className="flex items-center p-4 ">
           <input
             className="rounded-lg text-black flex-1 p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Type your message here"

@@ -41,7 +41,7 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   }, [socket]); // Re-run effect if socket changes
 
   return (
-    <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
+    <div className="flex justify-center items-center h-[calc(100vh-6rem)]">
       {!isMatched && (
         <div className="flex flex-col items-center space-y-8">
           <button
