@@ -51,24 +51,24 @@ export default function Messages() {
   return (
     <>
       {/* Message container takes up full height, with scrolling */}
-      <div className="flex flex-col h-[calc(100vh-12rem)] w-full overflow-y-auto space-y-6 ">
+      <div className=" flex-col h-[calc(100vh-16rem)] overflow-y-auto space-y-8 ">
         {messageReceived?.map((message, index) => {
           return (
             <div
-              key={message.actualMessage + index}
+              key={index}
               className={`${
                 message.fromId === userID
-                  ? "flex justify-end w-full"
-                  : "flex justify-start w-full"
+                  ? "flex justify-end "
+                  : "flex justify-start "
               }`}
             >
-              <div className="flex space-x-4 items-center">
+              <div className="flex text-wrap items-center">
                 <p
                   className={`${
                     message.fromId === userID
                       ? "bg-blue-500 text-white"
                       : "bg-green-500 text-white"
-                  } rounded-lg p-2 text-lg max-w-[80%]`}
+                  } rounded-lg p-2 text-lg mx-10 max-w-prose`}
                 >
                   {message.actualMessage}
                   <span className="text-xs ml-12">{message.timStamp}</span>
@@ -89,9 +89,17 @@ export default function Messages() {
         />
         <button
           onClick={handleSubmit}
-          className="bg-blue-500 text-white mx-2 px-6 py-2 rounded-lg"
+          className="bg-blue-500 text-white mx-2 px-6 py-2 flex rounded-lg"
         >
           Send
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="size-6"
+          >
+            <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+          </svg>
         </button>
       </div>
     </>

@@ -58,7 +58,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
         {isSideOpen && (
           <div className="flex">
             {/* Sidebar */}
-            <Sidebar className="mt-16 h-[calc(100vh-4rem)] ">
+            <Sidebar className="mt-16 h-[calc(100vh-4rem)] bg-purpleColor ">
               <SidebarContent>
                 <SidebarGroup className="mt-10 space-y-6">
                   <Link href={"/chat"} className="flex">
