@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const useSocket = () => {
-  const [userID, setUserId] = useState("");
   const [socket, setSocket] = useState<ReturnType<typeof io> | null>(null);
-  const [inRoom, setInRoom] = useState<boolean | undefined>(undefined);
+
   // const [usersConnected, setUsersConnected] = use
 
   useEffect(() => {
@@ -18,7 +17,6 @@ const useSocket = () => {
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      setUserId(newSocket.id as string);
       console.log(`user ${newSocket.id} has connected`);
     });
 
@@ -28,7 +26,7 @@ const useSocket = () => {
     };
   }, []);
 
-  return { socket, userID, inRoom };
+  return { socket };
 };
 
 export default useSocket;

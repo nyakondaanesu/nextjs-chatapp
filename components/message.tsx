@@ -22,24 +22,25 @@ export default function Messages() {
     const payload: message = {
       fromId: userID,
       actualMessage: inputValue,
-      timStamp: `${time.getHours()}: ${time.getMinutes()}`,
+      timStamp: `${time.getHours()}:${time.getMinutes()}`,
     };
 
-    setMessageReceived((prevMessage) => [...prevMessage, payload]); //add to the sent messages array
+    setMessageReceived((prevMessages) => [...prevMessages, payload]);
+
+    // Emit the message to the server
     socket?.emit("sendPrivateMessage", payload);
     setInputValue("");
   };
 
-  // listening to the hello event
   useEffect(() => {
-    console.log("hello");
+    // Handle received messages
     socket?.on("receivePrivateMessage", (dataMessage: message) => {
       setMessageReceived((prevMessages) => [...prevMessages, dataMessage]);
-      console.log(`message reeceived ${dataMessage.actualMessage}`);
     });
 
     return () => {
-      socket?.off("hello");
+      socket?.off("sendPrivateMessage");
+      socket?.off("receivePrivateMessage");
     };
   }, [socket]);
 
@@ -49,47 +50,50 @@ export default function Messages() {
 
   return (
     <>
-      <section className="flex flex-col ">
-        <div className="flex flex-col space-y-4">
-          {messageReceived?.map((message, index) => {
-            return (
-              <div
-                key={message.actualMessage + index}
-                className={`${
-                  message.fromId === userID
-                    ? "flex justify-end "
-                    : "flex justify-start "
-                } `}
-              >
-                <div className="flex space-x-4 items-center">
-                  <p
-                    className={`${
-                      message.fromId === userID ? "bg-green-900" : "bg-blue-900"
-                    } text-white rounded-lg p-2 text-lg`}
-                  >
-                    {message.actualMessage + message.fromId}
-                    <span className="text-xs  justify-end">
-                      {message.timStamp}
-                    </span>
-                  </p>
-                </div>
+      {/* Message container takes up full height, with scrolling */}
+      <div className="flex flex-col h-[calc(100vh-12rem)] w-full overflow-y-auto space-y-6 ">
+        {messageReceived?.map((message, index) => {
+          return (
+            <div
+              key={message.actualMessage + index}
+              className={`${
+                message.fromId === userID
+                  ? "flex justify-end w-full"
+                  : "flex justify-start w-full"
+              }`}
+            >
+              <div className="flex space-x-4 items-center">
+                <p
+                  className={`${
+                    message.fromId === userID
+                      ? "bg-blue-500 text-white"
+                      : "bg-green-500 text-white"
+                  } rounded-lg p-2 text-lg max-w-[80%]`}
+                >
+                  {message.actualMessage}
+                  <span className="text-xs ml-12">{message.timStamp}</span>
+                </p>
               </div>
-            );
-          })}
-        </div>
-      </section>
-      <input
-        className="rounded-lg text-black mt-10"
-        placeholder="type message here"
-        onChange={handleChange}
-        value={inputValue}
-      />
-      <button
-        onClick={handleSubmit}
-        className="bg-green-900 mx-5 px-5 rounded-lg"
-      >
-        send me
-      </button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Input field and send button stay at the bottom */}
+      <div className="flex items-center p-4 ">
+        <input
+          className="rounded-lg text-black flex-1 p-2 border border-gray-300"
+          placeholder="Type your message here"
+          onChange={handleChange}
+          value={inputValue}
+        />
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-500 text-white mx-2 px-6 py-2 rounded-lg"
+        >
+          Send
+        </button>
+      </div>
     </>
   );
 }
