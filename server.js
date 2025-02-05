@@ -34,6 +34,7 @@ const startServer = async () => {
 
     let queuedUsers = [];
     let privateRooms = [];
+    let users = {};
 
     await app.prepare();
     const server = express();
@@ -47,43 +48,54 @@ const startServer = async () => {
 
     // Socket.IO events
     io.on("connection", (socket) => {
+      socket.on("authenticate", (googleUserId) => {
+        console.log(`Authenticating user with Google ID: ${googleUserId}`);
+        queuedUsers.push(users[googleUserId]);
+        // If the user already has a socketId, remove the old one
+        if (users[googleUserId]) {
+          console.log(`Removing old socketId for user: ${googleUserId}`);
+          io.sockets.sockets.get(users[googleUserId])?.disconnect();
+          queuedUsers = queuedUsers.filter((id) => id !== users[googleUserId]);
+
+          // remove private room if user is in one
+        }
+
+        // Save the new socketId for this user
+        users[googleUserId] = socket.id;
+        console.log(users);
+      });
+
       console.log(`${socket.id} has connected`);
-      queuedUsers.push(socket.id);
+
+      //check if user has a session
+
       console.log(queuedUsers);
 
-      socket.on("message", (data) => {
-        // Handle incoming messages
-        socket.emit("message", data); // Broadcast to all clients
-      });
-
-      socket.on("hello", (dataMessage) => {
-        socket.broadcast.emit("hello", dataMessage);
-      });
-
       //joining a private chat room
-      socket.on("joinPrivateChat", () => {
+      socket.on("joinPrivateChat", (googleUserId) => {
         const createPrivateRoom = () => {
           const privateRoom = new room(generateUniqueId());
-
-          privateRoom.addItem(socket.id);
+          const key = users[googleUserId];
+          console.log(`your key is ${key}`);
+          privateRoom.addItem(key);
           privateRooms.push(privateRoom);
           socket.join(privateRoom.id);
           console.log(
-            `${socket.id} has created private chat room and joined that room too ${privateRoom.id}`
+            `${socket.id} has created private chat$ room and joined that room too ${privateRoom.id}`
           );
         };
 
         const availableRoom = privateRooms.find(
-          (room) => room.users.length === 1
+          (room) =>
+            room.users.length === 1 && room.users[0] != users[googleUserId]
         );
 
         if (availableRoom) {
-          // Add the user to the available room
-          availableRoom.addItem(socket.id);
+          availableRoom.addItem(users[googleUserId]);
           socket.join(availableRoom.id);
           io.to(availableRoom.id).emit("matchFound");
           console.log(
-            `${socket.id} joined existing private room: ${availableRoom.id}`
+            `${users[googleUserId]} joined existing private room: ${availableRoom.id}`
           );
         } else {
           // Create a new private room
@@ -110,7 +122,24 @@ const startServer = async () => {
       socket.on("disconnect", () => {
         console.log(`client ${socket.id} disconnected`);
         queuedUsers = queuedUsers.filter((item) => item != socket.id);
-        console.log(queuedUsers);
+
+        privateRooms = privateRooms.filter((room) => {
+          const userIndex = room.users.indexOf(socket.id);
+
+          if (userIndex !== -1) {
+            // If the user is in this room, remove them
+            room.users.splice(userIndex, 1);
+
+            // If the room has no users left, remove the room from privateRooms
+            if (room.users.length === 0) {
+              console.log(`Room ${room.id} is empty and will be removed`);
+              return false; // Remove the room
+            }
+          }
+
+          // Keep the room if the user is not in it
+          return true;
+        });
       });
     });
 
