@@ -1,3 +1,16 @@
+import { signIn } from "@/auth";
+
 export default function Home() {
-  return <>hey</>;
+  return (
+    <>
+      <form
+        action={async () => {
+          "use server";
+          await signIn("google", { redirectTo: "/chat" });
+        }}
+      >
+        <button type="submit">Signin with Google</button>
+      </form>
+    </>
+  );
 }

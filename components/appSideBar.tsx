@@ -42,7 +42,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
               height={48}
             />
             <label htmlFor="" className="text-white">
-              Zimbo Chat
+              ZimChat
             </label>
           </div>
           <div className="space-x-6 flex px-6">
@@ -57,14 +57,14 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
               <Sidebar className="mt-16 h-[calc(100vh-4rem)] bg-purpleColor  ">
                 <SidebarContent>
                   <SidebarGroup className="mt-10 space-y-6">
-                    <Link href={"/chat"} className="flex">
+                    <Link href={"/chat"} className="flex font-semibold">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="size-7 mx-4"
+                        className="size-7 mx-4 "
                       >
                         <path
                           strokeLinecap="round"
@@ -108,7 +108,11 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                       </svg>
                       Video
                     </Link>
+                    <hr className="border-t-2 border-zinc-300 w-full mx-auto my-4" />
+                    <h1 className="px-4 bg-zinc-300 rounded">users online</h1>
                   </SidebarGroup>
+
+                  <SidebarGroup>anesunyakonda</SidebarGroup>
                 </SidebarContent>
                 <SidebarFooter>
                   <button className="text-black">Log Out</button>
@@ -169,6 +173,8 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   </svg>
                   Video
                 </Link>
+                <hr className="border-t-2 border-zinc-300 w-full mx-auto my-4" />
+                <h1 className="mx-4 bg-zinc-300 rounded">users online</h1>
               </SidebarGroup>
             </div>
           </>
