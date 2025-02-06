@@ -10,6 +10,7 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   const { socket, googleUserId } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
+  const [matchedUser, setMatchedUser] = useState<string | null>(null);
 
   const handleJoinRoom = () => {
     if (socket) {
@@ -27,9 +28,18 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
       setUserIdInstance(socket.id as string); // Now socket.id should be available
     });
 
-    socket.on("matchFound", () => {
+    socket.on("matchFound", (data) => {
       setIsLoading(false); // Stop loading when match is found
-      setIsMatched(true); // Set matched state to true
+      setIsMatched(true);
+      console.log(data);
+      if (data.thisUser.id === socket.id) {
+        // we are talking with other user
+        setMatchedUser(data.otherUser.username);
+      } else {
+        // we are talking with other user
+        setMatchedUser(data.thisUser.username);
+      }
+      // Set matched state to true
     });
 
     // Clean up event listeners when the component is unmounted or socket changes
@@ -62,7 +72,12 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
         </div>
       )}
 
-      {isMatched && <div className="w-full">{children}</div>}
+      {isMatched && (
+        <div className="w-full">
+          <p>{`talking with ${matchedUser}`}</p>
+          {children}
+        </div>
+      )}
     </div>
   );
 };

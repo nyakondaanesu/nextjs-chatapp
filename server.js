@@ -78,8 +78,20 @@ const startServer = async () => {
 
         if (availableRoom && availableRoom.addUser(socket.id)) {
           socket.join(availableRoom.id);
+
           io.to(availableRoom.id).emit("matchFound", {
-            roomId: availableRoom.id,
+            thisUser: {
+              id: availableRoom.users[0],
+              username: Object.entries(users).find(
+                ([key, value]) => value === availableRoom.users[0]
+              )?.[0],
+            },
+            otherUser: {
+              id: availableRoom.users[1],
+              username: Object.entries(users).find(
+                ([key, value]) => value === availableRoom.users[1]
+              )?.[0],
+            },
           });
           console.log(
             `${googleUserId} joined existing private room: ${availableRoom.id}`
