@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        purpleColor: "#25303A",
-        main: "#D7D7D7",
+        side: "#171717",
+        main: "#212121",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         secondary: {

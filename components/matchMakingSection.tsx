@@ -5,6 +5,7 @@ import { setSocketInstance } from "../lib/socketInstance";
 import { setUserIdInstance } from "../lib/socketInstance";
 import React, { useEffect, useState } from "react";
 import Loader from "./cluter";
+import Button from "./matchButton";
 
 const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   const { socket, googleUserId } = useSocket();
@@ -52,18 +53,19 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex justify-center items-center h-[calc(100vh-6rem)]">
       {!isMatched && (
-        <div className="flex flex-col items-center space-y-8">
-          <button
+        <div className="flex text-center flex-col items-center space-y-2">
+          <h1 className="text-white text-3xl font-semibold mx-3">
+            Meet, Connect and Chat with <br className="hidden md:block" />{" "}
+            Random Strangers
+          </h1>
+          <h6 className="text-white text-sm font-thin">
+            Experience Spontaneous Conversations with Strangers
+          </h6>
+
+          <Button
             onClick={handleJoinRoom}
-            disabled={isLoading} // Disable button while loading
-            className={
-              isLoading
-                ? "text-black  "
-                : "text-white bg-purpleColor font-semi-bold py-2 px-4 rounded-lg"
-            }
-          >
-            {isLoading ? "Searching for a match..." : "Match Make"}
-          </button>
+            isLoading={isLoading} // Pass isLoading prop
+          ></Button>
           {isLoading && (
             <div className="justify-center items-center">
               <Loader />
