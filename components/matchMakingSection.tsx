@@ -14,6 +14,7 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   const [isMatched, setIsMatched] = useState(false);
   const [matchedUser, setMatchedUser] = useState<string | null>(null);
   const [matchedUserPic, setMatchedUserPic] = useState<string | null>(null);
+  const [isSearchingDisc, setIsSearchingDisc] = useState(false);
 
   const handleJoinRoom = () => {
     if (socket) {
@@ -58,14 +59,20 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
       // Set matched state to true
     });
 
-    socket.on("userDisconnected", (data) => {
-      console.log(`User ${data} disconnected`);
+    socket.on("userDisconnected", ({ userId, message }) => {
+      setIsMatched(false);
+      setIsLoading(true);
+      setMatchedUser(null);
+      setMatchedUserPic(null);
+      setIsSearchingDisc(true);
+      console.log(`User ${userId} disconnected: ${message}`);
     });
 
     // Clean up event listeners when the component is unmounted or socket changes
     return () => {
       socket.off("matchFound");
       socket.off("connect");
+      socket.off("userDisconnected");
     };
   }, [socket]); // Re-run effect if socket changes
 
@@ -91,7 +98,9 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
 
           <Button
             onClick={handleJoinRoom}
-            isLoading={isLoading} // Pass isLoading prop
+            isLoading={isLoading}
+            isSearchingDisc={isSearchingDisc}
+            // Pass isLoading prop
           ></Button>
           {isLoading && (
             <div className="justify-center items-center">

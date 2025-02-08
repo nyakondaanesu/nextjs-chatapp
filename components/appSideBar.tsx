@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 import NewMatchButton from "./newMatch";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
-  const [isSideOpen, setSideOpen] = useState(true);
+  const [isSideOpen, setSideOpen] = useState(false);
   const toggleSidebar = () => setSideOpen((prev) => !prev);
   const { data: Session } = useSession();
   const userProfilePic = Session?.user?.image;

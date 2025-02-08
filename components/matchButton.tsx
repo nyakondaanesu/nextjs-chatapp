@@ -4,14 +4,22 @@ import styled from "styled-components";
 const Button = ({
   onClick,
   isLoading,
+  isSearchingDisc,
 }: {
   onClick: () => void;
   isLoading: boolean;
+  isSearchingDisc: boolean;
 }) => {
   return (
     <StyledWrapper>
       <button className="button mt-10" onClick={onClick}>
-        <span> {isLoading ? "Searching for a match..." : "Match Make"}</span>
+        <span className={isSearchingDisc ? `hidden` : ""}>
+          {" "}
+          {isLoading ? "Match making..." : "Match Make"}
+        </span>
+        <span className={!isSearchingDisc ? `hidden` : ""}>
+          {isSearchingDisc ? "Searching for a new match.." : "Match Make"}
+        </span>
       </button>
     </StyledWrapper>
   );

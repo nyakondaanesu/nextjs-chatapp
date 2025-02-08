@@ -53,6 +53,32 @@ const startServer = async () => {
       },
     });
 
+    const cleanupUserConnection = (socketId, googleUserId) => {
+      // Remove user from all rooms they're in
+      privateRooms = privateRooms.filter((room) => {
+        if (room.users.includes(socketId)) {
+          // Notify other users in the room about disconnection
+          io.to(room.id).emit("userDisconnected", {
+            userId: googleUserId,
+            message: "User has disconnected",
+          });
+          room.removeUser(socketId);
+        }
+        return !room.isEmpty();
+      });
+
+      // Clean up user mappings
+      delete profilePics[socketId];
+
+      // Remove socket ID from users object
+      const entries = Object.entries(users);
+      for (const [userId, sId] of entries) {
+        if (sId === socketId) {
+          delete users[userId];
+        }
+      }
+    };
+
     io.on("connection", (socket) => {
       socket.on("authenticate", ({ googleUserId, googleProfilePic }) => {
         console.log(`Authenticating user with Google ID: ${googleUserId}`);
@@ -60,17 +86,17 @@ const startServer = async () => {
         if (users[googleUserId]) {
           const oldSocketId = users[googleUserId];
           io.sockets.sockets.get(oldSocketId)?.disconnect();
-          privateRooms = privateRooms.filter((room) => {
-            room.removeUser(oldSocketId);
-
-            return !room.isEmpty();
-          });
+          cleanupUserConnection(oldSocketId, googleUserId);
+          const oldSocket = io.sockets.sockets.get(oldSocketId);
+          if (oldSocket) {
+            oldSocket.disconnect(true);
+          }
         }
 
         users[googleUserId] = socket.id;
         profilePics[socket.id] = googleProfilePic;
         console.log(
-          `User ${googleUserId} is now authenticated with socket ${socket.id}`
+          `User ${googleUserId} is now authenticated with new socket ${socket.id}`
         );
       });
 
@@ -128,11 +154,10 @@ const startServer = async () => {
       });
 
       socket.on("disconnect", () => {
-        privateRooms = privateRooms.filter((room) => {
-          room.removeUser(socket.id);
-
-          return !room.isEmpty();
-        });
+        const googleUserId = Object.entries(users).find(
+          ([_, sId]) => sId === socket.id
+        )?.[0];
+        cleanupUserConnection(socket.id, googleUserId);
 
         console.log(`Client ${socket.id} disconnected`);
       });
