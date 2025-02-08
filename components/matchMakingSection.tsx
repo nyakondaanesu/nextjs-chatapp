@@ -6,6 +6,7 @@ import { setUserIdInstance } from "../lib/socketInstance";
 import React, { useEffect, useState } from "react";
 import Loader from "./cluter";
 import Button from "./matchButton";
+import NewMatchButton from "./newMatch";
 
 const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   const { socket, googleUserId, googleProfilePic } = useSocket();
@@ -54,7 +55,7 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   }, [socket]); // Re-run effect if socket changes
 
   return (
-    <div className="flex justify-center items-center h-dvh]">
+    <div className="flex justify-center items-center h-dvh">
       {!isMatched && (
         <div className="flex text-center flex-col items-center space-y-2">
           <h1
@@ -87,17 +88,20 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
 
       {isMatched && (
         <div className="w-full">
-          <div className="flex bg-zinc-700 p-4">
+          <div className="flex bg-zinc-800 p-4 justify-between">
             {matchedUserPic && (
               <>
-                <img
-                  src={matchedUserPic}
-                  width={32}
-                  height={32}
-                  alt="profile image"
-                  className="rounded-full mx-6"
-                />
-                <p className="text-white">{` ${matchedUser}`}</p>
+                <div className="flex">
+                  <img
+                    src={matchedUserPic}
+                    width={32}
+                    height={32}
+                    alt="profile image"
+                    className="rounded-full mx-6"
+                  />
+                  <p className="text-white hidden md:block">{` ${matchedUser}`}</p>
+                </div>
+                <NewMatchButton></NewMatchButton>
               </>
             )}
           </div>

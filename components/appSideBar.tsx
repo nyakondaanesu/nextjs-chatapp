@@ -10,16 +10,22 @@ import Image from "next/image";
 import React, { ReactNode, useState } from "react";
 import Link from "next/link";
 
+import { useSession } from "next-auth/react";
+import NewMatchButton from "./newMatch";
+
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const [isSideOpen, setSideOpen] = useState(true);
   const toggleSidebar = () => setSideOpen((prev) => !prev);
+  const { data: Session } = useSession();
+  const userProfilePic = Session?.user?.image;
+  const useremail = Session?.user?.email;
 
   return (
     <>
       <SidebarProvider>
         <button
           onClick={toggleSidebar}
-          className="fixed top-4 left  z-[100] text-white  rounded-md "
+          className="fixed top-5 left  z-[100] text-white  rounded-md "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -36,10 +42,11 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
             />
           </svg>
         </button>
+
         {isSideOpen && (
           <>
-            <div className="bg-side text-white   h-screen ">
-              <div className="bg-purpleColor  flex items-center justify-between py-3">
+            <div className="bg-side text-white flex flex-col h-screen ">
+              <div className="bg-zinc-900  flex items-center justify-between py-4">
                 <div className="flex items-center mx-8  w-full">
                   <Image
                     className=""
@@ -57,8 +64,11 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   </label>
                 </div>
               </div>
-              <SidebarGroup className="mt-10 space-y-6 mx-2">
-                <Link href={"/chat"} className="flex">
+              <SidebarGroup className="mt-10 space-y-8 mx-2 flex-grow">
+                <Link
+                  href={"/chat"}
+                  className="flex items-center text-white text-sm font-semibold"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -75,7 +85,10 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   </svg>
                   Chat
                 </Link>
-                <Link href={"/Space"} className=" flex">
+                <Link
+                  href={"/Space"}
+                  className=" flex items-center text-white text-sm"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -92,7 +105,10 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   </svg>
                   Space
                 </Link>
-                <Link href={"/Video"} className="flex">
+                <Link
+                  href={"/Video"}
+                  className="flex items-center text-white text-sm"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -110,8 +126,23 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   Video
                 </Link>
                 <hr className="border-t-2 border-zinc-600  w-full px-4 my-4" />
-                <h1 className="mx-4 bg-main rounded">users online</h1>
               </SidebarGroup>
+              <div className="py-4 bg-zinc-900 text-center items-center flex ">
+                {userProfilePic && (
+                  <>
+                    <img
+                      src={userProfilePic}
+                      alt="user profifile picture"
+                      width={24}
+                      height={24}
+                      className="rounded-full mx-2"
+                    />
+                    <p className="text-xs text-zinc-400 truncate">
+                      {useremail}
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
           </>
         )}
