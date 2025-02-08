@@ -51,7 +51,7 @@ export default function Messages() {
   return (
     <>
       <>
-        <div className="flex-col flex h-[calc(100vh-14rem)] overflow-y-auto space-y-8 px-4">
+        <div className="flex-col flex h-[calc(100vh-12rem)] overflow-y-auto space-y-8 px-4">
           {messageReceived?.map((message, index) => {
             const isSentByUser = message.fromId === userID;
 
@@ -63,7 +63,7 @@ export default function Messages() {
                 } w-full`}
               >
                 <div
-                  className={`flex flex-col ${
+                  className={`flex flex-col mt-2 ${
                     isSentByUser ? "items-end" : "items-start"
                   } max-w-[60%]`}
                 >

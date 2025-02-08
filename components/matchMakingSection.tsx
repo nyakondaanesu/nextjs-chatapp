@@ -8,10 +8,11 @@ import Loader from "./cluter";
 import Button from "./matchButton";
 
 const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
-  const { socket, googleUserId } = useSocket();
+  const { socket, googleUserId, googleProfilePic } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
   const [matchedUser, setMatchedUser] = useState<string | null>(null);
+  const [matchedUserPic, setMatchedUserPic] = useState<string | null>(null);
 
   const handleJoinRoom = () => {
     if (socket) {
@@ -36,9 +37,11 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
       if (data.thisUser.id === socket.id) {
         // we are talking with other user
         setMatchedUser(data.otherUser.username);
+        setMatchedUserPic(data.otherUser.image);
       } else {
         // we are talking with other user
         setMatchedUser(data.thisUser.username);
+        setMatchedUserPic(data.thisUser.image);
       }
       // Set matched state to true
     });
@@ -51,14 +54,22 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
   }, [socket]); // Re-run effect if socket changes
 
   return (
-    <div className="flex justify-center items-center h-[calc(100vh-6rem)]">
+    <div className="flex justify-center items-center h-dvh]">
       {!isMatched && (
         <div className="flex text-center flex-col items-center space-y-2">
-          <h1 className="text-white text-3xl font-semibold mx-3">
+          <h1
+            className={
+              isLoading ? `hidden` : `text-white text-3xl font-semibold mx-3`
+            }
+          >
             Meet, Connect and Chat with <br className="hidden md:block" />{" "}
             Random Strangers
           </h1>
-          <h6 className="text-white text-sm font-thin">
+          <h6
+            className={
+              isLoading ? `hidden` : `text-white text-xs font-thin mx-3`
+            }
+          >
             Experience Spontaneous Conversations with Strangers
           </h6>
 
@@ -76,7 +87,20 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
 
       {isMatched && (
         <div className="w-full">
-          <p>{`talking with ${matchedUser}`}</p>
+          <div className="flex bg-zinc-700 p-4">
+            {matchedUserPic && (
+              <>
+                <img
+                  src={matchedUserPic}
+                  width={32}
+                  height={32}
+                  alt="profile image"
+                  className="rounded-full mx-6"
+                />
+                <p className="text-white">{` ${matchedUser}`}</p>
+              </>
+            )}
+          </div>
           {children}
         </div>
       )}

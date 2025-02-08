@@ -8,6 +8,7 @@ const useSocket = () => {
 
   const { data: session } = useSession();
   const googleUserId = session?.user?.email;
+  const googleProfilePic = session?.user?.image;
 
   useEffect(() => {
     const newSocket = io("http://localhost:3000", {
@@ -22,7 +23,7 @@ const useSocket = () => {
       console.log(`user ${newSocket.id} has connected`);
     });
 
-    newSocket.emit("authenticate", googleUserId);
+    newSocket.emit("authenticate", { googleUserId, googleProfilePic });
 
     // Cleanup on component unmount
     return () => {
@@ -30,7 +31,7 @@ const useSocket = () => {
     };
   }, []);
 
-  return { socket, googleUserId };
+  return { socket, googleUserId, googleProfilePic };
 };
 
 export default useSocket;

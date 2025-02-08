@@ -41,6 +41,7 @@ const startServer = async () => {
 
     let privateRooms = [];
     let users = {}; // Maps Google User ID to Socket ID
+    let profilePics = {};
 
     await app.prepare();
     const server = express();
@@ -53,7 +54,7 @@ const startServer = async () => {
     });
 
     io.on("connection", (socket) => {
-      socket.on("authenticate", (googleUserId) => {
+      socket.on("authenticate", ({ googleUserId, googleProfilePic }) => {
         console.log(`Authenticating user with Google ID: ${googleUserId}`);
 
         if (users[googleUserId]) {
@@ -66,6 +67,7 @@ const startServer = async () => {
         }
 
         users[googleUserId] = socket.id;
+        profilePics[socket.id] = googleProfilePic;
         console.log(
           `User ${googleUserId} is now authenticated with socket ${socket.id}`
         );
@@ -85,12 +87,14 @@ const startServer = async () => {
               username: Object.entries(users).find(
                 ([key, value]) => value === availableRoom.users[0]
               )?.[0],
+              image: profilePics[availableRoom.users[0]],
             },
             otherUser: {
               id: availableRoom.users[1],
               username: Object.entries(users).find(
                 ([key, value]) => value === availableRoom.users[1]
               )?.[0],
+              image: profilePics[availableRoom.users[1]],
             },
           });
           console.log(

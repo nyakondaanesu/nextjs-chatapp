@@ -116,9 +116,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
           </>
         )}
 
-        <div className=" w-full mt-16 h-[calc(100vh-4rem)] overflow-y-scroll">
-          {children}
-        </div>
+        <div className=" w-full h-100vh overflow-y-scroll">{children}</div>
       </SidebarProvider>
     </>
   );
