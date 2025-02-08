@@ -29,6 +29,7 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
       setMatchedUserPic(null);
       setIsLoading(true);
       console.log("new match");
+
       socket.emit("joinPrivateChat", googleUserId);
     }
   };
@@ -55,6 +56,10 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
         setMatchedUserPic(data.thisUser.image);
       }
       // Set matched state to true
+    });
+
+    socket.on("userDisconnected", (data) => {
+      console.log(`User ${data} disconnected`);
     });
 
     // Clean up event listeners when the component is unmounted or socket changes
@@ -98,10 +103,10 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
 
       {isMatched && (
         <div className="w-full">
-          <div className="flex bg-zinc-800 p-4 justify-between">
+          <div className="flex bg-zinc-800 p-4 items center justify-between">
             {matchedUserPic && (
               <>
-                <div className="flex">
+                <div className="flex items-center">
                   <img
                     src={matchedUserPic}
                     width={32}
@@ -109,7 +114,7 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
                     alt="profile image"
                     className="rounded-full mx-6"
                   />
-                  <p className="text-white hidden md:block">{` ${matchedUser}`}</p>
+                  <p className="text-white text-xs hidden md:block">{` ${matchedUser}`}</p>
                 </div>
                 <NewMatchButton
                   onClick={handleNewMatch}

@@ -10,6 +10,7 @@ export default function Messages() {
     fromId: string | null;
     actualMessage: string;
     timStamp?: string;
+    image?: string;
   };
 
   const [inputValue, setInputValue] = useState("");
@@ -30,6 +31,27 @@ export default function Messages() {
     // Emit the message to the server
     socket?.emit("sendPrivateMessage", payload);
     setInputValue("");
+  };
+
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Image = e.target?.result as string;
+        const time = new Date();
+
+        const payload: message = {
+          fromId: userID,
+          actualMessage: "",
+          timStamp: `${time.getHours()}:${time.getMinutes()}`,
+          image: base64Image as string,
+        };
+        setMessageReceived((prevMessages) => [...prevMessages, payload]);
+        socket?.emit("sendPrivateMessage", payload);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   useEffect(() => {
@@ -77,6 +99,13 @@ export default function Messages() {
                   }
                 `}
                   >
+                    {message.image && (
+                      <img
+                        src={message.image}
+                        alt="Sent Image"
+                        className="max-w-full max-h-40 object-cover"
+                      />
+                    )}
                     <p className="break-words">{message.actualMessage}</p>
                     <span className="text-xs mt-1 block opacity-70">
                       {message.timStamp}
@@ -89,8 +118,32 @@ export default function Messages() {
         </div>
 
         <div className="flex items-center p-4 space-x-4 ">
+          <label htmlFor="imageInput" className="cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="size-6 text-white"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
+              />
+            </svg>
+          </label>
           <input
-            className="rounded-lg text-black flex-1 p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImage}
+          />
+
+          <input
+            className="rounded-md text-black flex-1 p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Type your message here"
             onChange={handleChange}
             value={inputValue}

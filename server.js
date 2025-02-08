@@ -62,6 +62,7 @@ const startServer = async () => {
           io.sockets.sockets.get(oldSocketId)?.disconnect();
           privateRooms = privateRooms.filter((room) => {
             room.removeUser(oldSocketId);
+
             return !room.isEmpty();
           });
         }
@@ -127,11 +128,13 @@ const startServer = async () => {
       });
 
       socket.on("disconnect", () => {
-        console.log(`Client ${socket.id} disconnected`);
         privateRooms = privateRooms.filter((room) => {
           room.removeUser(socket.id);
+
           return !room.isEmpty();
         });
+
+        console.log(`Client ${socket.id} disconnected`);
       });
     });
 
