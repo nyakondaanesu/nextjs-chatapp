@@ -22,6 +22,16 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const handleNewMatch = () => {
+    if (socket) {
+      setIsMatched(false); // Reset match state
+      setMatchedUser(null);
+      setMatchedUserPic(null);
+      setIsLoading(true);
+      console.log("new match");
+      socket.emit("joinPrivateChat", googleUserId);
+    }
+  };
   useEffect(() => {
     if (!socket) return;
 
@@ -101,11 +111,14 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
                   />
                   <p className="text-white hidden md:block">{` ${matchedUser}`}</p>
                 </div>
-                <NewMatchButton></NewMatchButton>
+                <NewMatchButton
+                  onClick={handleNewMatch}
+                  isLoading={isLoading}
+                ></NewMatchButton>
               </>
             )}
           </div>
-          {children}
+          {isMatched && children}
         </div>
       )}
     </div>

@@ -1,10 +1,16 @@
 import React, { MouseEventHandler } from "react";
 import styled from "styled-components";
 
-const NewMatchButton = () => {
+const NewMatchButton = ({
+  onClick,
+  isLoading,
+}: {
+  onClick: () => void;
+  isLoading: boolean;
+}) => {
   return (
     <StyledWrapper>
-      <button className="button text-xs ">
+      <button className="button text-xs " onClick={onClick}>
         <span> New Match</span>
       </button>
     </StyledWrapper>
