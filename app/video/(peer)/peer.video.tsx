@@ -94,13 +94,25 @@ const Video = () => {
         audio: true,
       });
 
+      // Check if stream is active and has tracks
+      console.log("Stream active:", stream.active);
+      console.log("Video tracks:", stream.getVideoTracks().length);
+      console.log("Audio tracks:", stream.getAudioTracks().length);
+
       if (sendingVideo.current) {
         sendingVideo.current.srcObject = stream;
         sendingVideo.current.onloadedmetadata = () => {
-          sendingVideo.current
-            ?.play()
-            .then(() => console.log("Local video started"))
-            .catch((e) => console.log("Local video play error:", e));
+          sendingVideo.current?.play().then(() => {
+            console.log(
+              "Local video dimensions:",
+              sendingVideo.current?.videoWidth,
+              sendingVideo.current?.videoHeight
+            );
+            console.log(
+              "Local video playing state:",
+              sendingVideo.current?.paused ? "paused" : "playing"
+            );
+          });
         };
       }
 
@@ -108,9 +120,17 @@ const Video = () => {
         peerConnectionRef.current = handlePeerConnection();
       }
 
+      // Log peer connection state
+      peerConnectionRef.current.onconnectionstatechange = () => {
+        console.log(
+          "Peer Connection State:",
+          peerConnectionRef.current?.connectionState
+        );
+      };
+
       stream.getTracks().forEach((track) => {
         peerConnectionRef.current?.addTrack(track, stream);
-        console.log(`Track type: ${track.kind} added successfully`);
+        console.log(`Track ${track.kind} enabled:`, track.enabled);
       });
     } catch (error) {
       console.error("Failed to start video:", error);
