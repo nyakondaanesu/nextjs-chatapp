@@ -11,7 +11,7 @@ const useSocket = () => {
   const googleProfilePic = session?.user?.image;
 
   useEffect(() => {
-    const newSocket = io("https://websocket-server-oya2.onrender.com", {
+    const newSocket = io("wss://websocket-server-oya2.onrender.com", {
       transports: ["websocket"],
       reconnection: true,
       reconnectionAttempts: 5,
