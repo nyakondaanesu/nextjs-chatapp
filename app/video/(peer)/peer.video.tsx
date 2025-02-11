@@ -84,7 +84,16 @@ const Video = () => {
 
       if (sendingVideo.current) {
         sendingVideo.current.srcObject = stream;
-        console.log("Local stream attached to sending video element");
+        sendingVideo.current.onloadedmetadata = () => {
+          sendingVideo.current
+            ?.play()
+            .catch((e) => console.log("Play error:", e));
+        };
+        console.log(
+          "Local video dimensions:",
+          sendingVideo.current.videoWidth,
+          sendingVideo.current.videoHeight
+        );
       }
 
       if (!peerConnectionRef.current) {
@@ -206,18 +215,19 @@ const Video = () => {
           </div>
         )}
         {matchedUser && (
-          <div className="flex">
+          <div className="flex gap-4 w-full max-w-4xl">
             <video
               ref={receivingVideo}
               autoPlay
               playsInline
-              className="w-1/2"
+              className="w-1/2 bg-black rounded-lg min-h-[300px] object-cover"
             ></video>
             <video
               ref={sendingVideo}
               autoPlay
               playsInline
-              className="w-1/2"
+              muted // Add muted for local video
+              className="w-1/2 bg-black rounded-lg min-h-[300px] object-cover"
             ></video>
           </div>
         )}
