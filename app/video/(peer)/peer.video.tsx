@@ -101,6 +101,7 @@ const Video = () => {
 
     socket.on("vidoeMatchFound", () => {
       setMatchedUser(true);
+      console.log("video match found");
       setIsLoading(false);
     });
 
