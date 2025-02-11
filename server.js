@@ -99,6 +99,19 @@ const startServer = async () => {
           `User ${googleUserId} is now authenticated with new socket ${socket.id}`
         );
       });
+      socket.on("offer", (offer) => {
+        console.log("📨 Offer received from client:", offer);
+        socket.broadcast.emit("offer", offer);
+      });
+
+      socket.on("answer", (answer) => {
+        socket.broadcast.emit("answer", answer);
+      });
+
+      socket.on("ice-candidate", (candidate) => {
+        console.log(`Received message: ${candidate}`);
+        io.emit("ice-candidate", candidate);
+      });
 
       socket.on("joinPrivateChat", (googleUserId) => {
         let availableRoom = privateRooms.find(

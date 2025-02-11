@@ -29,8 +29,8 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
       setMatchedUser(null);
       setMatchedUserPic(null);
       setIsLoading(true);
-      console.log("new match");
 
+      socket.emit("authenticate", { googleUserId, googleProfilePic });
       socket.emit("joinPrivateChat", googleUserId);
     }
   };

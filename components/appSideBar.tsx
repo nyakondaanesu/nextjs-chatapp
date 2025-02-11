@@ -1,17 +1,10 @@
 "use client";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarProvider,
-} from "./ui/sidebar";
+import { SidebarGroup, SidebarProvider } from "./ui/sidebar";
 import Image from "next/image";
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
-import NewMatchButton from "./newMatch";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const [isSideOpen, setSideOpen] = useState(false);
@@ -106,7 +99,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   Space
                 </Link>
                 <Link
-                  href={"/Video"}
+                  href={"/video"}
                   className="flex items-center text-white text-sm"
                 >
                   <svg
