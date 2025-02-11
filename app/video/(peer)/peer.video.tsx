@@ -3,7 +3,7 @@ import useSocket from "@/app/(customHooks)/customHook";
 import Button from "@/components/matchButton";
 import Loader from "@/components/ui/loader";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 // use ref when you want a value to be updated but not re-render the component
 
@@ -80,10 +80,13 @@ const Video = () => {
     }
   };
 
-  const startVideo = async () => {
+  const startVideo = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
+        video: {
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        },
         audio: true,
       });
 
@@ -92,26 +95,23 @@ const Video = () => {
         sendingVideo.current.onloadedmetadata = () => {
           sendingVideo.current
             ?.play()
-            .then(() => console.log("Local video playing"))
-            .catch((e) => console.log("Local play error:", e));
+            .then(() => console.log("Local video started"))
+            .catch((e) => console.log("Local video play error:", e));
         };
       }
-
-      const videoTrack = stream.getVideoTracks()[0];
-      console.log("Video track settings:", videoTrack.getSettings());
 
       if (!peerConnectionRef.current) {
         peerConnectionRef.current = handlePeerConnection();
       }
 
       stream.getTracks().forEach((track) => {
-        const sender = peerConnectionRef.current?.addTrack(track, stream);
-        console.log(`Track ${track.kind} added to peer connection`);
+        peerConnectionRef.current?.addTrack(track, stream);
+        console.log(`Track type: ${track.kind} added successfully`);
       });
     } catch (error) {
-      console.log("Video start error:", error);
+      console.error("Failed to start video:", error);
     }
-  };
+  }, [handlePeerConnection]);
 
   useEffect(() => {
     if (!socket) return;
