@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const NewMatchButton = ({
   onClick,
-  isLoading,
 }: {
   onClick: () => void;
   isLoading: boolean;

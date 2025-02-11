@@ -136,7 +136,7 @@ const Video = () => {
         peerConnectionRef.current = null;
       }
     };
-  }, [socket, handlePeerConnection]);
+  }, [socket, handlePeerConnection, startVideo]);
   return (
     <>
       <div className="flex flex-col h-screen items-center justify-center">

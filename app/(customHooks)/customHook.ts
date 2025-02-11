@@ -29,7 +29,7 @@ const useSocket = () => {
     return () => {
       newSocket.close();
     };
-  }, []);
+  }, [googleProfilePic, googleUserId, socket]);
 
   return { socket, googleUserId, googleProfilePic };
 };
