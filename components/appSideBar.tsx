@@ -80,7 +80,7 @@ const AppSideBar = () => {
                   Chat
                 </Link>
                 <Link
-                  href={"/Space"}
+                  href={"/space"}
                   className=" flex items-center text-white text-sm"
                 >
                   <svg
