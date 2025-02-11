@@ -23,13 +23,16 @@ const useSocket = () => {
       console.log(`user ${newSocket.id} has connected`);
     });
 
-    newSocket.emit("authenticate", { googleUserId, googleProfilePic });
+    if (googleUserId && googleProfilePic) {
+      newSocket.emit("authenticate", { googleUserId, googleProfilePic });
+    } else {
+      console.error("Session data is missing for authentication!");
+    }
 
-    // Cleanup on component unmount
     return () => {
       newSocket.close();
     };
-  }, [googleProfilePic, googleUserId, socket]);
+  }, [googleProfilePic, googleUserId]);
 
   return { socket, googleUserId, googleProfilePic };
 };
