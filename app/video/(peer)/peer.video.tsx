@@ -60,23 +60,27 @@ const Video = () => {
   }
 
   const handleCall = async () => {
-    startVideo();
-    if (socket) {
-      setIsLoading(true); // Set loading state to true when matchmaking starts
-      socket.emit("joinVideoChatRoom", googleUserId);
-      // Emit event to server
-      const peerConnection = peerConnectionRef.current;
-      if (!peerConnection) {
-        console.error("❌ PeerConnection is NULL!");
-        return;
-      }
-      try {
+    try {
+      await startVideo(); // Wait for video to start
+      console.log("Local video initialized before joining room");
+
+      if (socket) {
+        setIsLoading(true);
+        socket.emit("joinVideoChatRoom", googleUserId);
+
+        const peerConnection = peerConnectionRef.current;
+        if (!peerConnection) {
+          console.error("❌ PeerConnection is NULL!");
+          return;
+        }
+
         const offer = await peerConnection.createOffer();
         await peerConnection.setLocalDescription(offer);
         socket?.emit("offer", offer);
-      } catch (error) {
-        console.log(`Error creating offer: ${error}`);
+        console.log("Offer created and sent");
       }
+    } catch (error) {
+      console.log(`Error in handleCall: ${error}`);
     }
   };
 
