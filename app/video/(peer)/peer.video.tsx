@@ -124,7 +124,22 @@ const Video = () => {
       setIsLoading(false);
     });
 
+    peerConnection.oniceconnectionstatechange = () => {
+      console.log(
+        "ICE Connection State Changed:",
+        peerConnection.iceConnectionState
+      );
+    };
+
+    peerConnection.onicecandidate = (event) => {
+      if (event.candidate) {
+        console.log("Sending ICE candidate:", event.candidate);
+        socket?.emit("sendIceCandidate", event.candidate);
+      }
+    };
+
     socket.on("iceCandidate", async (candidate) => {
+      console.log("Received ICE candidate:", candidate);
       if (peerConnectionRef.current?.remoteDescription) {
         await peerConnectionRef.current.addIceCandidate(
           new RTCIceCandidate(candidate)
