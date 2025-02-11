@@ -35,15 +35,25 @@ const Video = () => {
     };
 
     peerConnection.ontrack = (event) => {
-      console.log("Track received:", event.track.kind);
+      console.log(
+        "Track received type:",
+        event.track.kind,
+        "ID:",
+        event.track.id
+      );
       if (receivingVideo.current) {
         if (!receivingVideo.current.srcObject) {
           receivingVideo.current.srcObject = new MediaStream();
-          console.log("Created new MediaStream for receiving video");
+          console.log("New MediaStream created for receiving");
         }
         const mediaStream = receivingVideo.current.srcObject as MediaStream;
         mediaStream.addTrack(event.track);
-        console.log("Track added to receiving MediaStream");
+        receivingVideo.current.onloadedmetadata = () => {
+          receivingVideo.current
+            ?.play()
+            .then(() => console.log("Remote video playing"))
+            .catch((e) => console.log("Remote play error:", e));
+        };
       }
     };
     return peerConnection;
@@ -72,49 +82,34 @@ const Video = () => {
 
   const startVideo = async () => {
     try {
-      console.log("Requesting media permissions...");
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true,
       });
-      console.log(
-        "Media permissions granted, tracks:",
-        stream.getTracks().length
-      );
 
       if (sendingVideo.current) {
         sendingVideo.current.srcObject = stream;
         sendingVideo.current.onloadedmetadata = () => {
           sendingVideo.current
             ?.play()
-            .catch((e) => console.log("Play error:", e));
+            .then(() => console.log("Local video playing"))
+            .catch((e) => console.log("Local play error:", e));
         };
-        console.log(
-          "Local video dimensions:",
-          sendingVideo.current.videoWidth,
-          sendingVideo.current.videoHeight
-        );
       }
+
+      const videoTrack = stream.getVideoTracks()[0];
+      console.log("Video track settings:", videoTrack.getSettings());
 
       if (!peerConnectionRef.current) {
         peerConnectionRef.current = handlePeerConnection();
-        console.log("Created new PeerConnection");
       }
 
       stream.getTracks().forEach((track) => {
-        peerConnectionRef.current?.addTrack(track, stream);
-        console.log(`Added ${track.kind} track to peer connection`);
+        const sender = peerConnectionRef.current?.addTrack(track, stream);
+        console.log(`Track ${track.kind} added to peer connection`);
       });
     } catch (error) {
-      console.error("Media access error:", error);
-      // Handle specific error types
-      if (error instanceof DOMException) {
-        if (error.name === "NotAllowedError") {
-          console.error("Camera/mic permissions denied");
-        } else if (error.name === "NotFoundError") {
-          console.error("No camera/mic devices found");
-        }
-      }
+      console.log("Video start error:", error);
     }
   };
 
