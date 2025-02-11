@@ -19,14 +19,28 @@ const Video = () => {
   const handlePeerConnection = useCallback(() => {
     const peerConnection = new RTCPeerConnection({
       iceServers: [
-        { urls: "stun:stun.l.google.com:19302" },
+        {
+          urls: [
+            "stun:stun1.l.google.com:19302",
+            "stun:stun2.l.google.com:19302",
+          ],
+        },
         {
           urls: "turn:relay1.expressturn.com:3478",
           username: "efifournier",
           credential: "webrtc",
         },
       ],
+      iceTransportPolicy: "all",
+      iceCandidatePoolSize: 10,
     });
+
+    peerConnection.oniceconnectionstatechange = () => {
+      console.log("ICE Connection State:", peerConnection.iceConnectionState);
+      if (peerConnection.iceConnectionState === "failed") {
+        peerConnection.restartIce();
+      }
+    };
 
     peerConnection.onicecandidate = (event) => {
       if (event.candidate) {
