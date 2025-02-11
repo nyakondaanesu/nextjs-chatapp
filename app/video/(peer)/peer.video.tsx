@@ -35,17 +35,15 @@ const Video = () => {
     };
 
     peerConnection.ontrack = (event) => {
+      console.log("Track received:", event.track.kind);
       if (receivingVideo.current) {
         if (!receivingVideo.current.srcObject) {
           receivingVideo.current.srcObject = new MediaStream();
-          console.log(`Created a new media stream`);
+          console.log("Created new MediaStream for receiving video");
         }
-
         const mediaStream = receivingVideo.current.srcObject as MediaStream;
         mediaStream.addTrack(event.track);
-        console.log(`Added track to media stream`);
-      } else {
-        console.log(`No video element found`);
+        console.log("Track added to receiving MediaStream");
       }
     };
     return peerConnection;
@@ -74,21 +72,40 @@ const Video = () => {
 
   const startVideo = async () => {
     try {
+      console.log("Requesting media permissions...");
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true,
       });
+      console.log(
+        "Media permissions granted, tracks:",
+        stream.getTracks().length
+      );
+
       if (sendingVideo.current) {
         sendingVideo.current.srcObject = stream;
+        console.log("Local stream attached to sending video element");
       }
+
       if (!peerConnectionRef.current) {
         peerConnectionRef.current = handlePeerConnection();
+        console.log("Created new PeerConnection");
       }
+
       stream.getTracks().forEach((track) => {
         peerConnectionRef.current?.addTrack(track, stream);
+        console.log(`Added ${track.kind} track to peer connection`);
       });
     } catch (error) {
-      console.log(`Error starting video: ${error}`);
+      console.error("Media access error:", error);
+      // Handle specific error types
+      if (error instanceof DOMException) {
+        if (error.name === "NotAllowedError") {
+          console.error("Camera/mic permissions denied");
+        } else if (error.name === "NotFoundError") {
+          console.error("No camera/mic devices found");
+        }
+      }
     }
   };
 
