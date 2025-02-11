@@ -16,7 +16,7 @@ const Video = () => {
   const [matchedUser, setMatchedUser] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handlePeerConnection() {
+  const handlePeerConnection = useCallback(() => {
     const peerConnection = new RTCPeerConnection({
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" },
@@ -27,37 +27,33 @@ const Video = () => {
         },
       ],
     });
+
     peerConnection.onicecandidate = (event) => {
       if (event.candidate) {
-        console.log(`sending ice candindaate ${event.candidate}`);
+        console.log("Sending ICE candidate");
         socket?.emit("sendIceCandidate", event.candidate);
       }
     };
 
     peerConnection.ontrack = (event) => {
-      console.log(
-        "Track received type:",
-        event.track.kind,
-        "ID:",
-        event.track.id
-      );
+      console.log("Received remote track:", event.track.kind);
       if (receivingVideo.current) {
-        if (!receivingVideo.current.srcObject) {
-          receivingVideo.current.srcObject = new MediaStream();
-          console.log("New MediaStream created for receiving");
-        }
-        const mediaStream = receivingVideo.current.srcObject as MediaStream;
-        mediaStream.addTrack(event.track);
+        receivingVideo.current.srcObject = event.streams[0];
         receivingVideo.current.onloadedmetadata = () => {
           receivingVideo.current
             ?.play()
             .then(() => console.log("Remote video playing"))
-            .catch((e) => console.log("Remote play error:", e));
+            .catch((e) => console.log("Remote video play error:", e));
         };
       }
     };
+
+    peerConnection.oniceconnectionstatechange = () => {
+      console.log("ICE Connection State:", peerConnection.iceConnectionState);
+    };
+
     return peerConnection;
-  }
+  }, [socket]);
 
   const handleCall = async () => {
     try {
