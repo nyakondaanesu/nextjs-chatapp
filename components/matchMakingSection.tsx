@@ -7,8 +7,9 @@ import React, { useEffect, useState } from "react";
 import Loader from "./cluter";
 import Button from "./matchButton";
 import NewMatchButton from "./newMatch";
+import Messages from "./message";
 
-const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
+const MatchMakingSection = () => {
   const { socket, googleUserId, googleProfilePic } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
@@ -132,7 +133,7 @@ const MatchMakingSection = ({ children }: { children: React.ReactNode }) => {
               </>
             )}
           </div>
-          {isMatched && children}
+          {isMatched && <Messages></Messages>}
         </div>
       )}
     </div>

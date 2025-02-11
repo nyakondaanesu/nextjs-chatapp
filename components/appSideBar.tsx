@@ -5,8 +5,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
+import MatchMakingSection from "./matchMakingSection";
 
-const AppSideBar = ({ children }: { children: React.ReactNode }) => {
+const AppSideBar = () => {
   const [isSideOpen, setSideOpen] = useState(false);
   const toggleSidebar = () => setSideOpen((prev) => !prev);
   const { data: Session } = useSession();
@@ -140,7 +141,9 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
           </>
         )}
 
-        <div className=" w-full h-100vh overflow-y-scroll">{children}</div>
+        <div className=" w-full h-100vh overflow-y-scroll">
+          {<MatchMakingSection></MatchMakingSection>}
+        </div>
       </SidebarProvider>
     </>
   );

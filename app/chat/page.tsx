@@ -12,9 +12,7 @@ const Chat = async () => {
   }
   return (
     <SessionProvider session={session}>
-      <AppSideBar
-        children={<MatchMakingSection children={<Messages />} />}
-      ></AppSideBar>
+      <AppSideBar></AppSideBar>
     </SessionProvider>
   );
 };
