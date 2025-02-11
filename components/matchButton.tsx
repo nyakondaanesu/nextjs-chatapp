@@ -8,7 +8,7 @@ const Button = ({
 }: {
   onClick: () => void;
   isLoading: boolean;
-  isSearchingDisc: boolean;
+  isSearchingDisc?: boolean;
 }) => {
   return (
     <StyledWrapper>

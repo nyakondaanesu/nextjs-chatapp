@@ -1,16 +1,20 @@
 "use client";
 import useSocket from "@/app/(customHooks)/customHook";
+import Button from "@/components/matchButton";
+import Loader from "@/components/ui/loader";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // use ref when you want a value to be updated but not re-render the component
 
 const Video = () => {
-  const { socket } = useSocket();
+  const { socket, googleProfilePic, googleUserId } = useSocket();
   const sendingVideo = useRef<HTMLVideoElement>(null);
   const receivingVideo = useRef<HTMLVideoElement>(null);
   const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
   const pendingCandidates = useRef<RTCIceCandidate[]>([]);
+  const [matchedUser, setMatchedUser] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handlePeerConnection() {
     const peerConnection = new RTCPeerConnection({
@@ -47,18 +51,24 @@ const Video = () => {
     return peerConnection;
   }
 
-  const handleCall = async (peerConnection: RTCPeerConnection) => {
+  const handleCall = async () => {
     startVideo();
-    if (!peerConnectionRef.current) {
-      console.error("❌ PeerConnection is NULL!");
-      return;
-    }
-    try {
-      const offer = await peerConnection.createOffer();
-      await peerConnection.setLocalDescription(offer);
-      socket?.emit("offer", offer);
-    } catch (error) {
-      console.log(`Error creating offer: ${error}`);
+    if (socket) {
+      setIsLoading(true); // Set loading state to true when matchmaking starts
+      socket.emit("joinVideoChatRoom", googleUserId);
+      // Emit event to server
+      const peerConnection = peerConnectionRef.current;
+      if (!peerConnection) {
+        console.error("❌ PeerConnection is NULL!");
+        return;
+      }
+      try {
+        const offer = await peerConnection.createOffer();
+        await peerConnection.setLocalDescription(offer);
+        socket?.emit("offer", offer);
+      } catch (error) {
+        console.log(`Error creating offer: ${error}`);
+      }
     }
   };
 
@@ -88,6 +98,12 @@ const Video = () => {
     peerConnectionRef.current = peerConnection;
 
     //listen and handle for incoming ice candidatees
+
+    socket.on("vidoeMatchFound", (data) => {
+      setMatchedUser(true);
+      setIsLoading(false);
+    });
+
     socket.on("iceCandidate", async (candidate) => {
       if (peerConnectionRef.current?.remoteDescription) {
         await peerConnectionRef.current.addIceCandidate(
@@ -140,28 +156,53 @@ const Video = () => {
   return (
     <>
       <div className="flex flex-col h-screen items-center justify-center">
-        <div className="flex">
-          <video
-            ref={sendingVideo}
-            autoPlay
-            playsInline
-            className="border-4 border-green-500 rounded-lg"
-          />
-          <video
-            ref={receivingVideo}
-            autoPlay
-            playsInline
-            className="border-4 border-red-500 rounded-lg"
-          />
-        </div>
-        <button
-          onClick={() =>
-            handleCall(peerConnectionRef.current as RTCPeerConnection)
-          }
-          className="bg-green-900 mt-5 p-2 rounded-lg text-white"
-        >
-          Call
-        </button>
+        {!matchedUser && (
+          <div className="flex text-center flex-col items-center space-y-2">
+            <h1
+              className={
+                isLoading ? `hidden` : `text-white text-3xl font-semibold mx-3`
+              }
+            >
+              Meet, Connect and Chat with <br className="hidden md:block" />{" "}
+              Random Strangers
+            </h1>
+            <h6
+              className={
+                isLoading ? `hidden` : `text-white text-xs font-thin mx-3`
+              }
+            >
+              Experience Spontaneous Conversations with Strangers
+            </h6>
+
+            <Button
+              onClick={handleCall}
+              isLoading={isLoading}
+
+              // Pass isLoading prop
+            ></Button>
+            {isLoading && (
+              <div className="justify-center items-center">
+                <Loader />
+              </div>
+            )}
+          </div>
+        )}
+        {matchedUser && (
+          <div className="flex">
+            <video
+              ref={receivingVideo}
+              autoPlay
+              playsInline
+              className="w-1/2"
+            ></video>
+            <video
+              ref={sendingVideo}
+              autoPlay
+              playsInline
+              className="w-1/2"
+            ></video>
+          </div>
+        )}
       </div>
     </>
   );

@@ -25,6 +25,7 @@ const useSocket = () => {
 
     if (googleUserId && googleProfilePic) {
       newSocket.emit("authenticate", { googleUserId, googleProfilePic });
+      newSocket.emit("authenticateVideo", { googleUserId });
     } else {
       console.error("Session data is missing for authentication!");
     }
