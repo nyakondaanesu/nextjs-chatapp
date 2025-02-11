@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 // use ref when you want a value to be updated but not re-render the component
 
 const Video = () => {
-  const { socket, googleProfilePic, googleUserId } = useSocket();
+  const { socket, googleUserId } = useSocket();
   const sendingVideo = useRef<HTMLVideoElement>(null);
   const receivingVideo = useRef<HTMLVideoElement>(null);
   const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
@@ -99,7 +99,7 @@ const Video = () => {
 
     //listen and handle for incoming ice candidatees
 
-    socket.on("vidoeMatchFound", (data) => {
+    socket.on("vidoeMatchFound", () => {
       setMatchedUser(true);
       setIsLoading(false);
     });
