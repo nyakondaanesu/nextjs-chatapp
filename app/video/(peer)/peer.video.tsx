@@ -238,14 +238,14 @@ const Video = () => {
             ref={receivingVideo}
             autoPlay
             playsInline
-            className="w-full bg-black rounded-lg min-h-[300px] object-cover"
+            className="w-full bg-black rounded-lg h-dvh object-cover"
           />
           <video
             ref={sendingVideo}
             autoPlay
             playsInline
             muted
-            className="w-1/4 bg-black rounded-lg min-h-[300px] object-cover fixed top-5 left  z-[100]"
+            className="w-1/4 bg-black rounded-lg min-h-[100px] object-cover fixed top-5 left  z-[100]"
           />
         </div>
       )}
