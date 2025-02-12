@@ -115,6 +115,7 @@ const Video = () => {
       }
 
       const offer = await peerConnection.createOffer();
+      console.log("📤 Sending offer:", offer);
       await peerConnection.setLocalDescription(offer);
       socket?.emit("offer", offer);
     } catch (error) {
@@ -192,6 +193,7 @@ const Video = () => {
         const answer = await peerConnectionRef.current.createAnswer();
         await peerConnectionRef.current.setLocalDescription(answer);
         socket.emit("answer", answer);
+        console.log("📤 Sending answer:", answer);
       }
     });
 
