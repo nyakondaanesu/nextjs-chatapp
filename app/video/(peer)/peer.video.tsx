@@ -149,19 +149,26 @@ const Video = () => {
     };
 
     socket.on("iceCandidate", async (candidate) => {
-      console.log("Received ICE candidate:", candidate);
-      if (peerConnectionRef.current?.remoteDescription) {
-        while (pendingCandidates.current.length) {
-          const candidate = pendingCandidates.current.shift();
-          if (candidate) {
-            await peerConnectionRef.current.addIceCandidate(
-              new RTCIceCandidate(candidate)
-            );
-          }
-        }
+      if (peerConnection.remoteDescription) {
+        await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
       } else {
+        console.log("Storing ICE candidate until remote description is set");
         pendingCandidates.current.push(candidate);
-        console.log("Stored ICE candidate for later");
+      }
+    });
+
+    // Apply buffered ICE candidates once the answer is set
+    socket.on("answer", async (answer) => {
+      await peerConnection.setRemoteDescription(
+        new RTCSessionDescription(answer)
+      );
+
+      // Process all stored ICE candidates
+      while (pendingCandidates.current.length) {
+        const candidate = pendingCandidates.current.shift();
+        if (candidate) {
+          await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+        }
       }
     });
 
@@ -185,14 +192,6 @@ const Video = () => {
         const answer = await peerConnectionRef.current.createAnswer();
         await peerConnectionRef.current.setLocalDescription(answer);
         socket.emit("answer", answer);
-      }
-    });
-
-    socket.on("answer", async (answer) => {
-      if (peerConnectionRef.current) {
-        await peerConnectionRef.current.setRemoteDescription(
-          new RTCSessionDescription(answer)
-        );
       }
     });
 
