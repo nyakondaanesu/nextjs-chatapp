@@ -18,18 +18,24 @@ const Video = () => {
   const setupPeerConnection = useCallback(() => {
     const peerConnection = new RTCPeerConnection({
       iceServers: [
+        { urls: ["stun:jb-turn1.xirsys.com"] },
+        { urls: "stun:stun1.l.google.com:19302" }, // Google STUN
+        { urls: "stun:stun2.l.google.com:19302" },
         {
+          username:
+            "4RwB0r0tzMQiG_2CaNWUF_CZ9UUWRJI-tmFCPKTy6E7U9DA_bZcKbnq-i0x0LBk2AAAAAGer-RNhbmVzdW55YWtvbmRh",
+          credential: "914853f4-e8e0-11ef-b240-0242ac120004",
           urls: [
-            "stun:stun1.l.google.com:19302",
-            "stun:stun2.l.google.com:19302",
+            "turn:jb-turn1.xirsys.com:80?transport=udp",
+            "turn:jb-turn1.xirsys.com:3478?transport=udp",
+            "turn:jb-turn1.xirsys.com:80?transport=tcp",
+            "turn:jb-turn1.xirsys.com:3478?transport=tcp",
+            "turns:jb-turn1.xirsys.com:443?transport=tcp",
+            "turns:jb-turn1.xirsys.com:5349?transport=tcp",
           ],
         },
-        {
-          urls: "turn:relay1.expressturn.com:3478",
-          username: "efifournier",
-          credential: "webrtc",
-        },
       ],
+
       iceTransportPolicy: "all",
       iceCandidatePoolSize: 10,
     });
@@ -61,6 +67,10 @@ const Video = () => {
 
     return peerConnection;
   }, [socket]);
+
+  // After setupPeerConnection and before handleCall
+
+  // Then modify the Button onClick to use retryConnection
 
   // Start local video
   const startVideo = useCallback(async () => {
@@ -141,19 +151,28 @@ const Video = () => {
     socket.on("iceCandidate", async (candidate) => {
       console.log("Received ICE candidate:", candidate);
       if (peerConnectionRef.current?.remoteDescription) {
-        await peerConnectionRef.current.addIceCandidate(
-          new RTCIceCandidate(candidate)
-        );
+        while (pendingCandidates.current.length) {
+          const candidate = pendingCandidates.current.shift();
+          if (candidate) {
+            await peerConnectionRef.current.addIceCandidate(
+              new RTCIceCandidate(candidate)
+            );
+          }
+        }
       } else {
         pendingCandidates.current.push(candidate);
+        console.log("Stored ICE candidate for later");
       }
     });
 
     socket.on("offer", async (offer) => {
+      console.log("Received offer");
       await startVideo();
+
       if (peerConnectionRef.current) {
         await peerConnectionRef.current.setRemoteDescription(offer);
 
+        // Process any pending candidates now
         while (pendingCandidates.current.length) {
           const candidate = pendingCandidates.current.shift();
           if (candidate) {
@@ -209,6 +228,7 @@ const Video = () => {
             Experience Spontaneous Conversations with Strangers
           </h6>
           <Button onClick={handleCall} isLoading={isLoading} />
+
           {isLoading && <Loader />}
         </div>
       ) : (
