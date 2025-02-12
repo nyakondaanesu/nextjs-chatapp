@@ -198,6 +198,11 @@ const Video = () => {
       }
     });
 
+    socket.on("leaveVideoChatRoom", (googleUserId) => {
+      console.log(`${googleUserId} left the video chat room`);
+      window.location.reload();
+    });
+
     return () => {
       socket.off("icecandidate");
       socket.off("offer");
@@ -212,6 +217,7 @@ const Video = () => {
 
   const onCallEnd = () => {
     window.location.reload();
+    socket?.emit("leaveVideoChatRoom", googleUserId);
   };
 
   return (
@@ -250,7 +256,7 @@ const Video = () => {
             autoPlay
             playsInline
             muted
-            className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right z-[100] border-2 border-green-500"
+            className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right-5 z-[100] border-2 border-green-500"
           />
           <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100]">
             <button className="bg-red-700 rounded-full p-2" onClick={onCallEnd}>
