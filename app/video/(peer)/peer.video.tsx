@@ -68,11 +68,6 @@ const Video = () => {
     return peerConnection;
   }, [socket]);
 
-  // After setupPeerConnection and before handleCall
-
-  // Then modify the Button onClick to use retryConnection
-
-  // Start local video
   const startVideo = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -81,6 +76,8 @@ const Video = () => {
       });
 
       if (sendingVideo.current) {
+        console.log("Starting local video");
+        console.log(sendingVideo.current.srcObject);
         sendingVideo.current.srcObject = stream;
         sendingVideo.current.onloadedmetadata = () => {
           sendingVideo.current
@@ -94,6 +91,7 @@ const Video = () => {
       }
 
       stream.getTracks().forEach((track) => {
+        console.log("Adding track:", track);
         peerConnectionRef.current?.addTrack(track, stream);
       });
     } catch (error) {
@@ -238,14 +236,14 @@ const Video = () => {
             ref={receivingVideo}
             autoPlay
             playsInline
-            className="w-1/2 bg-black rounded-lg min-h-[300px] object-cover"
+            className="w-1/2 bg-green-900 rounded-lg min-h-[300px] object-cover"
           />
           <video
             ref={sendingVideo}
             autoPlay
             playsInline
             muted
-            className="w-1/2 bg-black rounded-lg min-h-[300px] object-cover"
+            className="w-1/2 bg-red-900 rounded-lg min-h-[300px] object-cover"
           />
         </div>
       )}
