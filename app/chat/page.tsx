@@ -1,5 +1,5 @@
 import AppSideBar from "@/components/appSideBar";
-
+import MatchMakingSection from "@/components/matchMakingSection";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
@@ -11,7 +11,9 @@ const Chat = async () => {
   }
   return (
     <SessionProvider session={session}>
-      <AppSideBar></AppSideBar>
+      <AppSideBar>
+        <MatchMakingSection />
+      </AppSideBar>
     </SessionProvider>
   );
 };

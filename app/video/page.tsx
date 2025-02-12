@@ -2,6 +2,7 @@ import { SessionProvider } from "next-auth/react";
 import Video from "./(peer)/peer.video";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import AppSideBar from "@/components/appSideBar";
 
 const Home = async () => {
   const session = await auth();
@@ -11,7 +12,9 @@ const Home = async () => {
   return (
     <>
       <SessionProvider session={session}>
-        <Video />
+        <AppSideBar>
+          <Video />
+        </AppSideBar>
       </SessionProvider>
     </>
   );

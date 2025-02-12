@@ -234,7 +234,7 @@ const Video = () => {
           {isLoading && <Loader />}
         </div>
       ) : (
-        <div className="flex gap-4 w-full max-w-6xl">
+        <div className="flex flex-col h-dvh w-full max-w-6xl">
           <video
             ref={receivingVideo}
             autoPlay
@@ -250,7 +250,7 @@ const Video = () => {
           />
           <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100]">
             <button className="bg-red-700 rounded-full p-2">
-              <Image src="/endcall.png" width={30} height={30} alt="call-end" />
+              <Image src="/callEnd.png" width={30} height={30} alt="call-end" />
             </button>
             <button className="bg-zinc-300 p-2 rounded-full">
               <Image src="/mute.png" width={30} height={30} alt="mute" />
