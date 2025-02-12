@@ -76,14 +76,15 @@ const Video = () => {
       });
 
       if (sendingVideo.current) {
-        console.log("Starting local video");
-        console.log(sendingVideo.current.srcObject);
+        console.log("✅ Setting local video stream");
         sendingVideo.current.srcObject = stream;
         sendingVideo.current.onloadedmetadata = () => {
           sendingVideo.current
             ?.play()
             .catch((e) => console.log("Local video play error:", e));
         };
+      } else {
+        console.error("❌ sendingVideo.current is NULL");
       }
 
       if (!peerConnectionRef.current) {
@@ -131,6 +132,7 @@ const Video = () => {
     socket.on("videoMatchFound", () => {
       setMatchedUser(true);
       setIsLoading(false);
+      startVideo();
     });
 
     peerConnection.oniceconnectionstatechange = () => {
