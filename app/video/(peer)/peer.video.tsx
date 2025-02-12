@@ -233,19 +233,19 @@ const Video = () => {
           {isLoading && <Loader />}
         </div>
       ) : (
-        <div className="flex gap-4 w-full max-w-4xl">
+        <div className="flex  w-full max-w-4xl">
           <video
             ref={receivingVideo}
             autoPlay
             playsInline
-            className="w-1/2 bg-green-900 rounded-lg min-h-[300px] object-cover"
+            className="w-full bg-black rounded-lg min-h-[300px] object-cover border-2 border-green"
           />
           <video
             ref={sendingVideo}
             autoPlay
             playsInline
             muted
-            className="w-1/2 bg-red-900 rounded-lg min-h-[300px] object-cover"
+            className="w-1/4 fixed top-5 left  z-[100] bg-black rounded-lg min-h-[300px] object-cover"
           />
         </div>
       )}
