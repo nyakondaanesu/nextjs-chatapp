@@ -2,6 +2,7 @@
 import useSocket from "@/app/(customHooks)/customHook";
 import Button from "@/components/matchButton";
 import Loader from "@/components/ui/loader";
+import Image from "next/image";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 // Video Component
@@ -247,32 +248,12 @@ const Video = () => {
             muted
             className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right  z-[100]"
           />
-          <div className="flex fixed z-[100] top-5">
+          <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100]">
             <button className="bg-red-700 rounded-full p-2">
-              <svg
-                fill="none"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-white fill-current"
-              >
-                <path
-                  d="m21.949 12.993-.198 1.037c-.184.971-1.092 1.623-2.12 1.524l-2.047-.198c-.891-.086-1.651-.72-1.878-1.566l-.631-2.355c-.935-.383-1.965-.558-3.09-.526a8.102 8.102 0 0 0-3.14.708l-.392 2.205c-.148.836-.837 1.459-1.71 1.547l-2.035.204c-1.016.102-1.989-.544-2.277-1.51l-.31-1.038c-.308-1.031-.033-2.117.721-2.85 1.781-1.73 4.75-2.598 8.907-2.604 4.164-.005 7.225.857 9.185 2.588.825.728 1.21 1.806 1.015 2.834Z"
-                  fill="#ffffff"
-                  className="fill-212121"
-                ></path>
-              </svg>
+              <Image src="/endcall.png" width={30} height={30} alt="call-end" />
             </button>
             <button className="bg-zinc-300 p-2 rounded-full">
-              <svg
-                data-name="Layer 1"
-                id="Layer_1"
-                viewBox="0 0 48 48"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-white fill-current"
-              >
-                <title />
-                <path d="M24,33a8,8,0,0,0,8-8V18.83l8.41-8.41a2,2,0,0,0-2.83-2.83L32,13.17V9A8,8,0,0,0,16,9V25a7.94,7.94,0,0,0,.77,3.4l-1.49,1.49A9.93,9.93,0,0,1,14,25a2,2,0,0,0-4,0,13.92,13.92,0,0,0,2.38,7.79L7.59,37.59a2,2,0,1,0,2.83,2.83l4.65-4.65A13.94,13.94,0,0,0,22,38.84V43H21a2,2,0,0,0,0,4h6a2,2,0,0,0,0-4H26V38.84A14,14,0,0,0,38,25a2,2,0,0,0-4,0,10,10,0,0,1-16.09,7.92l1.43-1.43A8,8,0,0,0,24,33Zm4-8a4,4,0,0,1-4,4,4,4,0,0,1-1.75-.42L28,22.83Zm-8,0V9a4,4,0,0,1,8,0v8.17l-8,8C20,25.1,20,25.05,20,25Z" />
-              </svg>
+              <Image src="/mute.png" width={30} height={30} alt="mute" />
             </button>
           </div>
         </div>
