@@ -193,7 +193,7 @@ const Video = () => {
         const answer = await peerConnectionRef.current.createAnswer();
         await peerConnectionRef.current.setLocalDescription(answer);
         socket.emit("answer", answer);
-        console.log("📤 Sending answer:", answer);
+        console.log("📤 Sending answers:", answer);
       }
     });
 
