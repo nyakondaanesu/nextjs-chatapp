@@ -247,8 +247,8 @@ const Video = () => {
             muted
             className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right  z-[100]"
           />
-          <div className="flex fixed z-[100] bottom-5">
-            <button className="bg-red-700 rounded-full">
+          <div className="flex fixed z-[100] top-5">
+            <button className="bg-red-700 rounded-full p-2">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -262,7 +262,7 @@ const Video = () => {
                 ></path>
               </svg>
             </button>
-            <button>
+            <button className="bg-zinc-300 p-2 rounded-full">
               <svg
                 data-name="Layer 1"
                 id="Layer_1"
