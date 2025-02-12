@@ -14,6 +14,7 @@ const Video = () => {
   const pendingCandidates = useRef<RTCIceCandidate[]>([]);
   const [matchedUser, setMatchedUser] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOnDisconnect, setisOnDisconnect] = useState(false);
 
   // Setup Peer Connection
   const setupPeerConnection = useCallback(() => {
@@ -210,6 +211,10 @@ const Video = () => {
     };
   }, [socket, setupPeerConnection, startVideo]);
 
+  const onCallEnd = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="flex flex-col h-screen items-center justify-center">
       {!matchedUser ? (
@@ -234,7 +239,7 @@ const Video = () => {
           {isLoading && <Loader />}
         </div>
       ) : (
-        <div className="flex flex-col h-dvh w-full max-w-6xl">
+        <div className="flex flex-col h-dvh w-full items-center justify-center">
           <video
             ref={receivingVideo}
             autoPlay
@@ -246,10 +251,10 @@ const Video = () => {
             autoPlay
             playsInline
             muted
-            className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right  z-[100]"
+            className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right z-[100] border-2 border-green-500"
           />
           <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100]">
-            <button className="bg-red-700 rounded-full p-2">
+            <button className="bg-red-700 rounded-full p-2" onClick={onCallEnd}>
               <Image src="/callEnd.png" width={30} height={30} alt="call-end" />
             </button>
             <button className="bg-zinc-300 p-2 rounded-full">
