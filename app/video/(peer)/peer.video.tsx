@@ -233,7 +233,7 @@ const Video = () => {
           {isLoading && <Loader />}
         </div>
       ) : (
-        <div className="flex gap-4 w-full max-w-4xl">
+        <div className="flex gap-4 w-full max-w-6xl">
           <video
             ref={receivingVideo}
             autoPlay
@@ -245,8 +245,12 @@ const Video = () => {
             autoPlay
             playsInline
             muted
-            className="w-1/4 bg-black rounded-lg min-h-[100px] object-cover fixed top-5 left  z-[100]"
+            className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right  z-[100]"
           />
+          <div className="flex fixed z-[100] bottom-5">
+            <button>end call</button>
+            <button>mute</button>
+          </div>
         </div>
       )}
     </div>
