@@ -14,7 +14,6 @@ const Video = () => {
   const pendingCandidates = useRef<RTCIceCandidate[]>([]);
   const [matchedUser, setMatchedUser] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isOnDisconnect, setisOnDisconnect] = useState(false);
 
   // Setup Peer Connection
   const setupPeerConnection = useCallback(() => {

@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
-import MatchMakingSection from "./matchMakingSection";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const [isSideOpen, setSideOpen] = useState(false);
