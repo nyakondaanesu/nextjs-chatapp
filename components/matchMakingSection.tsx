@@ -1,7 +1,7 @@
 "use client";
 
 import useSocket from "@/app/(customHooks)/customHook";
-import { useSession } from "next-auth/react";
+//import { useSession } from "next-auth/react";
 import { setSocketInstance } from "../lib/socketInstance";
 import { setUserIdInstance } from "../lib/socketInstance";
 import React, { useEffect, useState } from "react";
@@ -12,15 +12,13 @@ import NewMatchButton from "./newMatch";
 import Messages from "./message";
 
 const MatchMakingSection = () => {
-  const { data: session } = useSession();
+  //const { data: session } = useSession();
   const { socket, googleUserId, googleProfilePic } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
   const [matchedUser, setMatchedUser] = useState<string | null>(null);
   const [matchedUserPic, setMatchedUserPic] = useState<string | null>(null);
   const [isSearchingDisc, setIsSearchingDisc] = useState(false);
-
-  const name = session?.user?.name;
 
   const handleJoinRoom = () => {
     if (socket) {
