@@ -122,8 +122,8 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 </svg>
                 Video
               </Link>
+              <hr className="border-t-2 border-zinc-600 w-full mx-4 my-2" />
             </SidebarGroup>
-            <hr className="border-t-2 border-zinc-600 w-full mx-4 my-2" />
 
             <div className="p-4 text-center items-center flex">
               {userProfilePic && username && (

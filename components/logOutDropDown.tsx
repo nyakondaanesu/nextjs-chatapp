@@ -28,8 +28,8 @@ export default function LogOutDropDown({
             />
             <p>{name}</p>
             <img
-              width="50"
-              height="50"
+              width="16"
+              height="16"
               src="/dropDown.png"
               alt="down-squared"
             />
