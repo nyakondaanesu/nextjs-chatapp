@@ -28,10 +28,10 @@ export default function LogOutDropDown({
             />
             <p>{name}</p>
             <img
-              width="24"
-              height="24"
-              src="https://img.icons8.com/ios/24/down-squared--v1.png"
-              alt="down-squared--v1"
+              width="50"
+              height="50"
+              src="https://img.icons8.com/ios-glyphs/50/down-squared.png"
+              alt="down-squared"
             />
           </span>
         </Button>

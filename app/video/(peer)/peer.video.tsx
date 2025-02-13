@@ -229,8 +229,12 @@ const Video = () => {
               isLoading ? "hidden" : "text-white text-3xl font-semibold mx-3"
             }
           >
-            Meet, Connect and Chat with <br className="hidden md:block" />{" "}
-            Random Strangers
+            Meet, Connect and{" "}
+            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent">
+              chat
+            </span>
+            with
+            <br className="hidden md:block" /> Random Strangers
           </h1>
           <h6
             className={
