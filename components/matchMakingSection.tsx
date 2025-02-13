@@ -4,7 +4,8 @@ import useSocket from "@/app/(customHooks)/customHook";
 import { setSocketInstance } from "../lib/socketInstance";
 import { setUserIdInstance } from "../lib/socketInstance";
 import React, { useEffect, useState } from "react";
-import Loader from "./cluter";
+import Loader from "@/components/ui/loader";
+
 import Button from "./matchButton";
 import NewMatchButton from "./newMatch";
 import Messages from "./message";

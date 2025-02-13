@@ -3,9 +3,7 @@ import { SidebarGroup, SidebarProvider } from "./ui/sidebar";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-
 import { useSession } from "next-auth/react";
-
 import LogOutDropDown from "./logOutDropDown";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
@@ -20,7 +18,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
       <SidebarProvider>
         <button
           onClick={toggleSidebar}
-          className="fixed top-5 left z-[100] text-white rounded-md "
+          className="fixed top-8 left z-[100] text-white rounded-md "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +120,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 </svg>
                 Video
               </Link>
-              <hr className="border-t-2 border-zinc-600 w-full mx-4 my-2" />
+              <hr className="border-t-2 border-zinc-700 my-2" />
             </SidebarGroup>
 
             <div className="p-4 text-center items-center flex">
