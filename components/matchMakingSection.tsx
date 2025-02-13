@@ -20,7 +20,7 @@ const MatchMakingSection = () => {
   const [matchedUserPic, setMatchedUserPic] = useState<string | null>(null);
   const [isSearchingDisc, setIsSearchingDisc] = useState(false);
 
-  const name = session?.user?.name;
+  // const name = session?.user?.name;
 
   const handleJoinRoom = () => {
     if (socket) {
