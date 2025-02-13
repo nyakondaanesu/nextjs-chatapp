@@ -3,7 +3,6 @@ import { SidebarGroup, SidebarProvider } from "./ui/sidebar";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-
 import { useSession } from "next-auth/react";
 import LogOutDropDown from "./logOutDropDown";
 
@@ -12,7 +11,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const toggleSidebar = () => setSideOpen((prev) => !prev);
   const { data: Session } = useSession();
   const userProfilePic = Session?.user?.image;
-  const useremail = Session?.user?.email;
+
   const userName = Session?.user?.name;
 
   return (

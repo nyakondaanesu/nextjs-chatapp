@@ -6,6 +6,7 @@ import { setSocketInstance } from "../lib/socketInstance";
 import { setUserIdInstance } from "../lib/socketInstance";
 import React, { useEffect, useState } from "react";
 import Loader from "./cluter";
+import Image from "next/image";
 import Button from "./matchButton";
 import NewMatchButton from "./newMatch";
 import Messages from "./message";
@@ -132,7 +133,7 @@ const MatchMakingSection = () => {
             {matchedUserPic && (
               <>
                 <div className="flex items-center">
-                  <img
+                  <Image
                     src={matchedUserPic}
                     width={32}
                     height={32}
