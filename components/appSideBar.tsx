@@ -3,16 +3,15 @@ import { SidebarGroup, SidebarProvider } from "./ui/sidebar";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
+
 import { useSession } from "next-auth/react";
-import LogOutDropDown from "./logOutDropDown";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const [isSideOpen, setSideOpen] = useState(false);
   const toggleSidebar = () => setSideOpen((prev) => !prev);
   const { data: Session } = useSession();
   const userProfilePic = Session?.user?.image;
-
-  const userName = Session?.user?.name;
+  const useremail = Session?.user?.email;
 
   return (
     <>
@@ -49,13 +48,12 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                     id="logo"
                     width={32}
                     height={32}
-                    priority
                   />
                   <label
                     htmlFor="logo"
                     className="text-white mx-2  text-md font-semibold"
                   >
-                    StreaMates
+                    ZimChat
                   </label>
                 </div>
               </div>
@@ -122,21 +120,22 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 </Link>
                 <hr className="border-t-2 border-zinc-600  w-full px-4 my-4" />
               </SidebarGroup>
-
-              {userProfilePic && userName && (
-                <LogOutDropDown
-                  name={userName}
-                  userImage={
-                    <Image
+              <div className="py-4 bg-zinc-900 text-center items-center flex ">
+                {userProfilePic && (
+                  <>
+                    <img
                       src={userProfilePic}
                       alt="user profifile picture"
                       width={24}
                       height={24}
                       className="rounded-full mx-2"
                     />
-                  }
-                ></LogOutDropDown>
-              )}
+                    <p className="text-xs text-zinc-400 truncate">
+                      {useremail}
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
           </>
         )}
