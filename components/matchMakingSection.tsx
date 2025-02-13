@@ -83,14 +83,14 @@ const MatchMakingSection = () => {
   }, [socket]); // Re-run effect if socket changes
 
   return (
-    <div className="flex justify-center items-center h-dvh">
+    <div className="flex justify-center items-center h-dvh w-full">
       {!isMatched && (
-        <div className="flex text-center flex-col items-center space-y-2">
+        <div className="flex text-center flex-col items-center space-y-2 w-full">
           <h5
             className={
               isLoading
                 ? `hidden`
-                : `text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent mb-5`
+                : `text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent mb-5 bg-clip-text`
             }
           >
             {`hello, ${name}`}
