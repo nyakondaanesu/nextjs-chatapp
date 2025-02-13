@@ -5,13 +5,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
+import { log } from "console";
+import LogOutDropDown from "./logOutDropDown";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const [isSideOpen, setSideOpen] = useState(false);
   const toggleSidebar = () => setSideOpen((prev) => !prev);
   const { data: Session } = useSession();
   const userProfilePic = Session?.user?.image;
-  const useremail = Session?.user?.email;
+  const username = Session?.user?.name;
 
   return (
     <>
@@ -121,19 +123,8 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 <hr className="border-t-2 border-zinc-600  w-full px-4 my-4" />
               </SidebarGroup>
               <div className="py-4 bg-zinc-900 text-center items-center flex ">
-                {userProfilePic && (
-                  <>
-                    <img
-                      src={userProfilePic}
-                      alt="user profifile picture"
-                      width={24}
-                      height={24}
-                      className="rounded-full mx-2"
-                    />
-                    <p className="text-xs text-zinc-400 truncate">
-                      {useremail}
-                    </p>
-                  </>
+                {userProfilePic && username && (
+                  <LogOutDropDown name={username} userImage={userProfilePic} />
                 )}
               </div>
             </div>

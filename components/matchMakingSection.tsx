@@ -8,15 +8,18 @@ import Loader from "./cluter";
 import Button from "./matchButton";
 import NewMatchButton from "./newMatch";
 import Messages from "./message";
+import { useSession } from "next-auth/react";
 
 const MatchMakingSection = () => {
   const { socket, googleUserId, googleProfilePic } = useSocket();
+  const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
   const [matchedUser, setMatchedUser] = useState<string | null>(null);
   const [matchedUserPic, setMatchedUserPic] = useState<string | null>(null);
   const [isSearchingDisc, setIsSearchingDisc] = useState(false);
 
+  const name = session?.user?.name;
   const handleJoinRoom = () => {
     if (socket) {
       setIsLoading(true); // Set loading state to true when matchmaking starts
@@ -81,6 +84,15 @@ const MatchMakingSection = () => {
     <div className="flex justify-center items-center h-dvh">
       {!isMatched && (
         <div className="flex text-center flex-col items-center space-y-2">
+          <h5
+            className={
+              isLoading
+                ? `hidden`
+                : `text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent mb-5 bg-clip-text text-center `
+            }
+          >
+            {`hello, ${name}`}
+          </h5>
           <h1
             className={
               isLoading ? `hidden` : `text-white text-3xl font-semibold mx-3`

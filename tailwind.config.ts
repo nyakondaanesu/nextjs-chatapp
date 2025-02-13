@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        side: "#1F1F28",
+        side: "#171717",
         main: "#212121",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
