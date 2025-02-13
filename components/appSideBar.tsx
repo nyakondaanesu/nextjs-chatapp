@@ -123,22 +123,20 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 <hr className="border-t-2 border-zinc-600  w-full px-4 my-4" />
               </SidebarGroup>
 
-              <div className="py-4 bg-zinc-900 text-center items-center flex ">
-                {userProfilePic && userName && (
-                  <LogOutDropDown
-                    name={userName}
-                    userImage={
-                      <Image
-                        src={userProfilePic}
-                        alt="user profifile picture"
-                        width={24}
-                        height={24}
-                        className="rounded-full mx-2"
-                      />
-                    }
-                  ></LogOutDropDown>
-                )}
-              </div>
+              {userProfilePic && userName && (
+                <LogOutDropDown
+                  name={userName}
+                  userImage={
+                    <Image
+                      src={userProfilePic}
+                      alt="user profifile picture"
+                      width={24}
+                      height={24}
+                      className="rounded-full mx-2"
+                    />
+                  }
+                ></LogOutDropDown>
+              )}
             </div>
           </>
         )}

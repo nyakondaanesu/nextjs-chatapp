@@ -19,7 +19,6 @@ const MatchMakingSection = () => {
   const [matchedUser, setMatchedUser] = useState<string | null>(null);
   const [matchedUserPic, setMatchedUserPic] = useState<string | null>(null);
   const [isSearchingDisc, setIsSearchingDisc] = useState(false);
-  const [isReset, setOnReset] = useState(false);
 
   const name = session?.user?.name;
 
@@ -36,7 +35,6 @@ const MatchMakingSection = () => {
       setMatchedUser(null);
       setMatchedUserPic(null);
       setIsLoading(true);
-      setOnReset(true);
 
       socket.emit("authenticate", { googleUserId, googleProfilePic });
       socket.emit("joinPrivateChat", googleUserId);
