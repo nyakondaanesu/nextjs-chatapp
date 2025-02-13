@@ -39,9 +39,8 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
         </button>
 
         <div
-          className={`bg-side text-white flex flex-col h-screen transition-all duration-300 ease-in-out transform ${
-            isSideOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`bg-side text-white flex flex-col h-screen transition-all duration-300 ease-in-out transform 
+          `}
         >
           <div className="bg-zinc-900 flex items-center justify-between py-4">
             <div className="flex items-center mx-8 w-full">

@@ -19,7 +19,7 @@ export default function LogOutDropDown({
       <DropdownTrigger>
         <Button variant="bordered">
           <span className="flex items-center space-x-2">
-            <Image src={userImage} width={16} height={16} alt="user image" />
+            <img src={userImage} width={16} height={16} alt="user image" />
             <p>{name}</p>
           </span>
         </Button>
