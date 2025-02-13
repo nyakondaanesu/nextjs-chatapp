@@ -50,8 +50,9 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 src="/newLogo.png"
                 alt="Hero image"
                 id="logo"
-                width={32}
-                height={32}
+                width={128}
+                height={128}
+                priority
               />
             </div>
           </div>
