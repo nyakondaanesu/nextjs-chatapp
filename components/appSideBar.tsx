@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
+import LogOutDropDown from "./logOutDropDown";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const [isSideOpen, setSideOpen] = useState(false);
@@ -12,6 +13,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
   const { data: Session } = useSession();
   const userProfilePic = Session?.user?.image;
   const useremail = Session?.user?.email;
+  const userName = Session?.user?.name;
 
   return (
     <>
@@ -48,12 +50,13 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                     id="logo"
                     width={32}
                     height={32}
+                    priority
                   />
                   <label
                     htmlFor="logo"
                     className="text-white mx-2  text-md font-semibold"
                   >
-                    ZimChat
+                    StreaMates
                   </label>
                 </div>
               </div>
@@ -120,20 +123,21 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 </Link>
                 <hr className="border-t-2 border-zinc-600  w-full px-4 my-4" />
               </SidebarGroup>
+
               <div className="py-4 bg-zinc-900 text-center items-center flex ">
-                {userProfilePic && (
-                  <>
-                    <img
-                      src={userProfilePic}
-                      alt="user profifile picture"
-                      width={24}
-                      height={24}
-                      className="rounded-full mx-2"
-                    />
-                    <p className="text-xs text-zinc-400 truncate">
-                      {useremail}
-                    </p>
-                  </>
+                {userProfilePic && userName && (
+                  <LogOutDropDown
+                    name={userName}
+                    userImage={
+                      <Image
+                        src={userProfilePic}
+                        alt="user profifile picture"
+                        width={24}
+                        height={24}
+                        className="rounded-full mx-2"
+                      />
+                    }
+                  ></LogOutDropDown>
                 )}
               </div>
             </div>
