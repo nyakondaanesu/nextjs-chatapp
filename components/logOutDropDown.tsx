@@ -30,7 +30,7 @@ export default function LogOutDropDown({
             <img
               width="50"
               height="50"
-              src="https://img.icons8.com/ios-glyphs/50/down-squared.png"
+              src="/dropDown.png"
               alt="down-squared"
             />
           </span>
