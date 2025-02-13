@@ -124,7 +124,17 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
               </SidebarGroup>
               <div className="py-4 bg-zinc-900 text-center items-center flex ">
                 {userProfilePic && username && (
-                  <LogOutDropDown name={username} userImage={userProfilePic} />
+                  <LogOutDropDown
+                    name={username}
+                    userImage={
+                      <Image
+                        src={userProfilePic}
+                        alt={`${username}'s profile picture`}
+                        width={8}
+                        height={8}
+                      />
+                    }
+                  />
                 )}
               </div>
             </div>
