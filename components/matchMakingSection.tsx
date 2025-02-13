@@ -90,9 +90,9 @@ const MatchMakingSection = () => {
         <div className="flex text-center flex-col items-center space-y-2">
           <h5
             className={
-              isLoading && isReset
+              isLoading
                 ? `hidden`
-                : `text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text`
+                : `text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent mb-5`
             }
           >
             {`hello, ${name}`}
