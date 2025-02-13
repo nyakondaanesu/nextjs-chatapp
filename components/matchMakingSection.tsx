@@ -88,6 +88,7 @@ const MatchMakingSection = () => {
         <div className="flex justify-center items-center h-screen w-full">
           {!isMatched && (
             <div className="flex text-center flex-col items-center space-y-2 w-full">
+              {/* 
               <h5
                 className={
                   isLoading
@@ -97,6 +98,8 @@ const MatchMakingSection = () => {
               >
                 {`hello, ${name}`}
               </h5>
+              
+              */}
               <h1
                 className={
                   isLoading
