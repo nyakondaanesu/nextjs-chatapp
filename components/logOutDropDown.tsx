@@ -5,21 +5,21 @@ import {
   DropdownItem,
 } from "@heroui/dropdown";
 import { Button } from "@heroui/button";
-
+import Image from "next/image";
 import React from "react";
 export default function LogOutDropDown({
   name,
   userImage,
 }: {
   name: string;
-  userImage: React.ReactNode;
+  userImage: string;
 }) {
   return (
     <Dropdown>
       <DropdownTrigger>
         <Button variant="bordered">
           <span className="flex items-center space-x-2">
-            {userImage}
+            <Image src={userImage} width={16} height={16} alt="user image" />
             <p>{name}</p>
           </span>
         </Button>

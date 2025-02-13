@@ -84,15 +84,15 @@ const MatchMakingSection = () => {
     <div className="flex justify-center items-center h-dvh">
       {!isMatched && (
         <div className="flex text-center flex-col items-center space-y-2">
-          <h5
+          <h6
             className={
               isLoading
                 ? `hidden`
-                : `text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent mb-5 bg-clip-text text-center `
+                : `mx-3 font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent mb-5 bg-clip-text text-center `
             }
           >
             {`hello, ${name}`}
-          </h5>
+          </h6>
           <h1
             className={
               isLoading ? `hidden` : `text-white text-3xl font-semibold mx-3`
