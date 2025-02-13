@@ -85,32 +85,46 @@ const MatchMakingSection = () => {
   return (
     <div className="flex justify-center items-center h-dvh w-full">
       {!isMatched && (
-        <div className="flex text-center flex-col items-center space-y-2 w-full">
-          <h1
-            className={
-              isLoading ? `hidden` : `text-white text-3xl font-semibold mx-3`
-            }
-          >
-            Meet, Connect and Chat with <br className="hidden md:block" />{" "}
-            Random Strangers
-          </h1>
-          <h6
-            className={
-              isLoading ? `hidden` : `text-white text-xs font-thin mx-3`
-            }
-          >
-            Experience Spontaneous Conversations with Strangers
-          </h6>
+        <div className="flex justify-center items-center h-screen w-full">
+          {!isMatched && (
+            <div className="flex text-center flex-col items-center space-y-2 w-full">
+              <h5
+                className={
+                  isLoading
+                    ? `hidden`
+                    : `text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent mb-5 bg-clip-text text-center w-full`
+                }
+              >
+                {`hello, ${name}`}
+              </h5>
+              <h1
+                className={
+                  isLoading
+                    ? `hidden`
+                    : `text-white text-3xl font-semibold mx-3`
+                }
+              >
+                Meet, Connect and Chat with <br className="hidden md:block" />{" "}
+                Random Strangers
+              </h1>
+              <h6
+                className={
+                  isLoading ? `hidden` : `text-white text-xs font-thin mx-3`
+                }
+              >
+                Experience Spontaneous Conversations with Strangers
+              </h6>
 
-          <Button
-            onClick={handleJoinRoom}
-            isLoading={isLoading}
-            isSearchingDisc={isSearchingDisc}
-            // Pass isLoading prop
-          ></Button>
-          {isLoading && (
-            <div className="justify-center items-center">
-              <Loader />
+              <Button
+                onClick={handleJoinRoom}
+                isLoading={isLoading}
+                isSearchingDisc={isSearchingDisc}
+              ></Button>
+              {isLoading && (
+                <div className="justify-center items-center">
+                  <Loader />
+                </div>
+              )}
             </div>
           )}
         </div>
