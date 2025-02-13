@@ -1,18 +1,15 @@
 "use client";
 
 import useSocket from "@/app/(customHooks)/customHook";
-//import { useSession } from "next-auth/react";
 import { setSocketInstance } from "../lib/socketInstance";
 import { setUserIdInstance } from "../lib/socketInstance";
 import React, { useEffect, useState } from "react";
 import Loader from "./cluter";
-import Image from "next/image";
 import Button from "./matchButton";
 import NewMatchButton from "./newMatch";
 import Messages from "./message";
 
 const MatchMakingSection = () => {
-  //const { data: session } = useSession();
   const { socket, googleUserId, googleProfilePic } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
@@ -81,41 +78,34 @@ const MatchMakingSection = () => {
   }, [socket]); // Re-run effect if socket changes
 
   return (
-    <div className="flex justify-center items-center h-dvh w-full">
+    <div className="flex justify-center items-center h-dvh">
       {!isMatched && (
-        <div className="flex justify-center items-center h-screen w-full">
-          {!isMatched && (
-            <div className="flex text-center flex-col items-center space-y-2 w-full">
-              <h1
-                className={
-                  isLoading
-                    ? `hidden`
-                    : `text-white text-3xl font-semibold mx-3 w-full`
-                }
-              >
-                Meet, Connect and Chat with <br className="hidden md:block" />{" "}
-                Random Strangers
-              </h1>
-              <h6
-                className={
-                  isLoading
-                    ? `hidden`
-                    : `text-white text-xs font-thin mx-3 w-full`
-                }
-              >
-                Experience Spontaneous Conversations with Strangers
-              </h6>
+        <div className="flex text-center flex-col items-center space-y-2">
+          <h1
+            className={
+              isLoading ? `hidden` : `text-white text-3xl font-semibold mx-3`
+            }
+          >
+            Meet, Connect and Chat with <br className="hidden md:block" />{" "}
+            Random Strangers
+          </h1>
+          <h6
+            className={
+              isLoading ? `hidden` : `text-white text-xs font-thin mx-3`
+            }
+          >
+            Experience Spontaneous Conversations with Strangers
+          </h6>
 
-              <Button
-                onClick={handleJoinRoom}
-                isLoading={isLoading}
-                isSearchingDisc={isSearchingDisc}
-              ></Button>
-              {isLoading && (
-                <div className="justify-center items-center">
-                  <Loader />
-                </div>
-              )}
+          <Button
+            onClick={handleJoinRoom}
+            isLoading={isLoading}
+            isSearchingDisc={isSearchingDisc}
+            // Pass isLoading prop
+          ></Button>
+          {isLoading && (
+            <div className="justify-center items-center">
+              <Loader />
             </div>
           )}
         </div>
@@ -127,7 +117,7 @@ const MatchMakingSection = () => {
             {matchedUserPic && (
               <>
                 <div className="flex items-center">
-                  <Image
+                  <img
                     src={matchedUserPic}
                     width={32}
                     height={32}
