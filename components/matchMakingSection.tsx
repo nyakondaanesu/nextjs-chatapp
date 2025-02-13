@@ -12,7 +12,7 @@ import NewMatchButton from "./newMatch";
 import Messages from "./message";
 
 const MatchMakingSection = () => {
-  const { data: session } = useSession();
+  //const { data: session } = useSession();
   const { socket, googleUserId, googleProfilePic } = useSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
