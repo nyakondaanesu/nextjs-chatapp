@@ -5,7 +5,7 @@ import {
   DropdownItem,
 } from "@heroui/dropdown";
 import { Button } from "@heroui/button";
-import Image from "next/image";
+
 import React from "react";
 export default function LogOutDropDown({
   name,
