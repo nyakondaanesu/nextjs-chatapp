@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
-import { log } from "console";
+
 import LogOutDropDown from "./logOutDropDown";
 
 const AppSideBar = ({ children }: { children: React.ReactNode }) => {
