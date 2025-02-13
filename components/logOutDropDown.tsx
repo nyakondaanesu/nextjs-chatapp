@@ -17,10 +17,22 @@ export default function LogOutDropDown({
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered">
+        <Button variant="bordered" className="rounded-full px-4">
           <span className="flex items-center space-x-2">
-            <img src={userImage} width={16} height={16} alt="user image" />
+            <img
+              src={userImage}
+              width={16}
+              height={16}
+              alt="user image"
+              className="rounded-full"
+            />
             <p>{name}</p>
+            <img
+              width="24"
+              height="24"
+              src="https://img.icons8.com/ios/24/down-squared--v1.png"
+              alt="down-squared--v1"
+            />
           </span>
         </Button>
       </DropdownTrigger>

@@ -40,18 +40,20 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
 
         {isSideOpen && (
           <div
-            className={`bg-side text-white flex flex-col h-screen transition-all duration-300 ease-in-out transform 
-         `}
+            className={
+              `bg-side text-white flex flex-col h-screen transition-all duration-300 ease-in-out transform translate-x-0
+         ` + (isSideOpen ? "translate-x-0" : "-translate-x-full")
+            }
           >
-            <div className="bg-zinc-900 flex items-center justify-between py-4">
+            <div className="flex items-center justify-between py-4">
               <div className="flex items-center mx-8 w-full">
                 <Image
                   className=""
                   src="/newLogo.png"
                   alt="Hero image"
                   id="logo"
-                  width={128}
-                  height={128}
+                  width={150}
+                  height={150}
                   priority
                 />
               </div>
@@ -121,10 +123,10 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                 Video
               </Link>
 
-              <hr className="border-t-2 border-zinc-600 w-full px-4 my-4" />
+              <hr className="border-t-2 border-zinc-600 w-full px-4 my-4 mx-4" />
             </SidebarGroup>
 
-            <div className="py-4 bg-zinc-900 text-center items-center flex">
+            <div className="p-4 text-center items-center flex">
               {userProfilePic && username && (
                 <LogOutDropDown name={username} userImage={userProfilePic} />
               )}
