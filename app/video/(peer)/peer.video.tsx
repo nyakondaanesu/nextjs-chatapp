@@ -119,7 +119,7 @@ const Video = () => {
       await peerConnection.setLocalDescription(offer);
       socket?.emit("offer", offer);
     } catch (error) {
-      // console.error("Error in handleCall:", error);
+      console.error("Error in handleCall:", error);
     }
   };
 
@@ -199,7 +199,7 @@ const Video = () => {
     });
 
     socket.on("leaveVideoChatRoom", (googleUserId) => {
-      //console.log(`${googleUserId} left the video chat room`);
+      console.log(`${googleUserId} left the video chat room`);
       window.location.reload();
     });
 

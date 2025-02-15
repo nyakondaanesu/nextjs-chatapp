@@ -5,7 +5,7 @@ import {
   DropdownItem,
 } from "@heroui/dropdown";
 import { Button } from "@heroui/button";
-import { signOut } from "@/auth";
+
 import React from "react";
 import { LogOut } from "@/lib/logging";
 
