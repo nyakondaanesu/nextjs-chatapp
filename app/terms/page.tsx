@@ -20,9 +20,9 @@ const Home = async () => {
             1. Acceptance of Terms
           </h3>
           <p className="mt-2 text-white">
-            By accessing or using StreaMates "the Service", you agree to comply
-            with these Terms of Service "Terms" and our Privacy Policy. If you
-            do not agree to these Terms, you must not use the Service.
+            By accessing or using StreaMates , you agree to comply with these
+            Terms of Service and our Privacy Policy. If you do not agree to
+            these Terms, you must not use the Service.
           </p>
           <h3 className="mt-10 text-lg text-white font-bold">2. Eligibility</h3>
           <p className="mt-2">
@@ -100,10 +100,10 @@ const Home = async () => {
             9. Disclaimer of Warranties
           </h3>
           <p className="mt-2">
-            The Service is provided "as is" and "as available," without any
-            warranties of any kind, either express or implied. We do not
-            guarantee the accuracy, completeness, or reliability of the Service
-            and are not responsible for any errors or interruptions in service.
+            The Service is provided and without any warranties of any kind,
+            either express or implied. We do not guarantee the accuracy,
+            completeness, or reliability of the Service and are not responsible
+            for any errors or interruptions in service.
           </p>
           <h3 className="mt-10 text-lg font-bold">10. Changes to Terms</h3>
           <p className="mt-2">
