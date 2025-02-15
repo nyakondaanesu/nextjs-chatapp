@@ -21,12 +21,20 @@ const Chat = async () => {
               &copy;{new Date().getFullYear()} Anesu Nyakonda
             </p>
             <div className="flex space-x-5">
-              <p className="font-light text-xs  tex-zinc-300  underline">
-                <Link href={"/terms"}>Terms and conditions</Link>
-              </p>
-              <p className="font-light text-xs underline pr-10 tex-zinc-300">
-                <Link href={"/terms"}> Privacy Policy</Link>
-              </p>
+              <Link
+                href={"/terms"}
+                className="font-light text-xs underline pr-10 tex-zinc-300"
+              >
+                Terms and conditions
+              </Link>
+
+              <Link
+                href={"/terms"}
+                className="font-light text-xs underline pr-10 tex-zinc-300"
+              >
+                {" "}
+                Privacy Policy
+              </Link>
             </div>
           </div>
         </footer>

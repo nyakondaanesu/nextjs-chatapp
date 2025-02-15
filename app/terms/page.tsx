@@ -11,7 +11,7 @@ const Home = async () => {
   return (
     <>
       <SessionProvider session={session}>
-        <div className="flex-col text-white ">
+        <div className="flex-col text-white md:mx-25 mx-10 bg-main ">
           <h1 className="text-white text-lg font-bold">
             Terms of Service for StreaMates
           </h1>
