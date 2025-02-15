@@ -5,8 +5,9 @@ import {
   DropdownItem,
 } from "@heroui/dropdown";
 import { Button } from "@heroui/button";
-
+import { signOut } from "@/auth";
 import React from "react";
+
 export default function LogOutDropDown({
   name,
   userImage,
@@ -38,7 +39,16 @@ export default function LogOutDropDown({
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem key="delete" className="text-danger" color="danger">
-          <Button variant="bordered">log out</Button>
+          <form
+            action={async () => {
+              "use server";
+              await signOut();
+            }}
+          >
+            <button type="submit" className="bg-red-600">
+              Log Out
+            </button>
+          </form>
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

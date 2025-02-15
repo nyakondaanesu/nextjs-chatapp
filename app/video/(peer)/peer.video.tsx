@@ -60,7 +60,7 @@ const Video = () => {
     };
 
     peerConnection.oniceconnectionstatechange = () => {
-      console.log("ICE Connection State:", peerConnection.iceConnectionState);
+      //  console.log("ICE Connection State:", peerConnection.iceConnectionState);
       if (peerConnection.iceConnectionState === "failed") {
         peerConnection.restartIce();
       }
@@ -77,7 +77,7 @@ const Video = () => {
       });
 
       if (sendingVideo.current) {
-        console.log("✅ Setting local video stream");
+        // console.log("✅ Setting local video stream");
         sendingVideo.current.srcObject = stream;
         sendingVideo.current.onloadedmetadata = () => {
           sendingVideo.current
@@ -93,7 +93,7 @@ const Video = () => {
       }
 
       stream.getTracks().forEach((track) => {
-        console.log("Adding track:", track);
+        //console.log("Adding track:", track);
         peerConnectionRef.current?.addTrack(track, stream);
       });
     } catch (error) {
@@ -115,11 +115,11 @@ const Video = () => {
       }
 
       const offer = await peerConnection.createOffer();
-      console.log("📤 Sending offer:", offer);
+      // console.log("📤 Sending offer:", offer);
       await peerConnection.setLocalDescription(offer);
       socket?.emit("offer", offer);
     } catch (error) {
-      console.error("Error in handleCall:", error);
+      // console.error("Error in handleCall:", error);
     }
   };
 
@@ -145,7 +145,7 @@ const Video = () => {
 
     peerConnection.onicecandidate = (event) => {
       if (event.candidate) {
-        console.log("Sending ICE candidate:", event.candidate);
+        //console.log("Sending ICE candidate:", event.candidate);
         socket?.emit("sendIceCandidate", event.candidate);
       }
     };
@@ -154,7 +154,7 @@ const Video = () => {
       if (peerConnection.remoteDescription) {
         await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
       } else {
-        console.log("Storing ICE candidate until remote description is set");
+        //console.log("Storing ICE candidate until remote description is set");
         pendingCandidates.current.push(candidate);
       }
     });
@@ -194,12 +194,12 @@ const Video = () => {
         const answer = await peerConnectionRef.current.createAnswer();
         await peerConnectionRef.current.setLocalDescription(answer);
         socket.emit("answer", answer);
-        console.log("📤 Sending answers:", answer);
+        //console.log("📤 Sending answers:", answer);
       }
     });
 
     socket.on("leaveVideoChatRoom", (googleUserId) => {
-      console.log(`${googleUserId} left the video chat room`);
+      //console.log(`${googleUserId} left the video chat room`);
       window.location.reload();
     });
 
@@ -263,7 +263,7 @@ const Video = () => {
             muted
             className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right-5 z-[100] border-2 border-green-500"
           />
-          <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100]">
+          <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100] bg-zinc-700 rounded-lg p-4">
             <button className="bg-red-700 rounded-full p-2" onClick={onCallEnd}>
               <Image src="/callEnd.png" width={30} height={30} alt="call-end" />
             </button>
