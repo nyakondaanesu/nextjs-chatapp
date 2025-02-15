@@ -39,7 +39,7 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
         {isSideOpen && (
           <div
             className={
-              `bg-side text-white flex flex-col h-screen transition-all duration-300 ease-in-out transform translate-x-0
+              `bg-side text-white flex flex-col h-screen transition-all duration-500 ease-in-out transform translate-x-0
          ` + (isSideOpen ? "translate-x-0" : "-translate-x-full")
             }
           >

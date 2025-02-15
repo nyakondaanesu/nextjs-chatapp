@@ -14,7 +14,7 @@ const Home = async () => {
       <SessionProvider session={session}>
         <AppSideBar>
           <Video />
-          <footer className="bg-main mt-10 mb-2">
+          <footer className="mx-2 bg-main mt-10 mb-2">
             <hr className="md:mx-25 mt-10 border-zinc-800" />
             <div className="flex justify-between mt-10">
               <p className="font-light text-xs md:mx-28">
