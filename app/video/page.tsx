@@ -2,6 +2,7 @@ import { SessionProvider } from "next-auth/react";
 import Video from "./(peer)/peer.video";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import AppSideBar from "@/components/appSideBar";
 
 const Home = async () => {
@@ -21,12 +22,20 @@ const Home = async () => {
                 &copy;{new Date().getFullYear()} Anesu Nyakonda
               </p>
               <div className="flex space-x-5">
-                <p className="font-light text-xs   underline">
-                  Terms & conditions
-                </p>
-                <p className="font-light text-xs underline pr-10">
+                <Link
+                  href={"/terms"}
+                  className="font-light text-xs underline pr-10 tex-zinc-300"
+                >
+                  Terms and conditions
+                </Link>
+
+                <Link
+                  href={"/terms"}
+                  className="font-light text-xs underline pr-10 tex-zinc-300"
+                >
+                  {" "}
                   Privacy Policy
-                </p>
+                </Link>
               </div>
             </div>
           </footer>
