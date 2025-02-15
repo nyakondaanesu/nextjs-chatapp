@@ -129,8 +129,8 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
                   href={link.href}
                   className={`flex items-center gap-3 p-2 transition ${
                     pathname === link.href
-                      ? "text-white text-sm font-semibold bg-main"
-                      : "font-normal hover:bg-main "
+                      ? "text-white text-sm font-semibold bg-main rounded-lg mr-3"
+                      : "font-normal hover:bg-main rounded-lg mr-3"
                   }`}
                 >
                   {link.icon} {/* Display the icon */}
