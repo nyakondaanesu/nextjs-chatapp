@@ -27,25 +27,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-main flex h-screen w-full  `}
       >
-        <Providers>
-          {children}
-          <footer className="bg-main">
-            <hr className="md:mx-28 mt-10 border-zinc-800" />
-            <div className="flex justify-between mt-10">
-              <p className="font-light text-xs md:mx-28">
-                &copy;{new Date().getFullYear()} Anesu Nyakonda
-              </p>
-              <div className="flex space-x-5">
-                <p className="font-light text-xs   underline">
-                  Terms & conditions
-                </p>
-                <p className="font-light text-xs underline pr-10">
-                  Privacy Policy
-                </p>
-              </div>
-            </div>
-          </footer>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
