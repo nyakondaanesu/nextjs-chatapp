@@ -232,8 +232,7 @@ const Video = () => {
             Meet, Connect and{" "}
             <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">
               video
-            </span>
-            {""}
+            </span>{" "}
             call
             <br className="hidden md:block" /> Random Strangers
           </h1>
@@ -247,22 +246,6 @@ const Video = () => {
           <Button onClick={handleCall} isLoading={isLoading} />
 
           {isLoading && <Loader />}
-          <footer className="bg-main mt-10">
-            <hr className="md:mx-28 mt-10 border-zinc-800" />
-            <div className="flex justify-between mt-10">
-              <p className="font-light text-xs md:mx-28">
-                &copy;{new Date().getFullYear()} Anesu Nyakonda
-              </p>
-              <div className="flex space-x-5">
-                <p className="font-light text-xs   underline">
-                  Terms & conditions
-                </p>
-                <p className="font-light text-xs underline pr-10">
-                  Privacy Policy
-                </p>
-              </div>
-            </div>
-          </footer>
         </div>
       ) : (
         <div className="flex flex-col h-dvh w-full items-center justify-center">

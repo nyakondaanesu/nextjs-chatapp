@@ -16,6 +16,9 @@ export default function LogOutDropDown({
   name: string;
   userImage: string;
 }) {
+  const handleLogout = async () => {
+    await LogOut();
+  };
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -40,7 +43,7 @@ export default function LogOutDropDown({
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem key="delete" className="text-danger" color="danger">
-          <button onClick={async () => await LogOut()}>log out</button>
+          <button onClick={handleLogout}>log out</button>
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

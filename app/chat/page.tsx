@@ -13,8 +13,8 @@ const Chat = async () => {
     <SessionProvider session={session}>
       <AppSideBar>
         <MatchMakingSection />
-        <footer className="bg-main mt-10">
-          <hr className="md:mx-28 mt-10 border-zinc-800" />
+        <footer className="bg-main mt-10 mb-2">
+          <hr className="md:mx-25 mt-10 border-zinc-800 " />
           <div className="flex justify-between mt-10">
             <p className="font-light text-xs md:mx-28">
               &copy;{new Date().getFullYear()} Anesu Nyakonda
