@@ -40,7 +40,7 @@ export default function LogOutDropDown({
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem key="delete" className="text-danger" color="danger">
-          <button onClick={() => LogOut()}>log out</button>
+          <button onClick={async () => await LogOut()}>log out</button>
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

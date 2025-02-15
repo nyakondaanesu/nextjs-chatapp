@@ -29,7 +29,7 @@ export default function RootLayout({
       >
         <Providers>
           {children}
-          <footer>
+          <footer className="bg-main">
             <hr className="md:mx-28 mt-10 border-zinc-800" />
             <div className="flex justify-between mt-10">
               <p className="font-light text-xs md:mx-28">
