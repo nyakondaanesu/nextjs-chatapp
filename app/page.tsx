@@ -15,7 +15,7 @@ export default function Home() {
         </header>
 
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
-          <div className="md:w-2/3 space-y-4 mt-3  md:text-left">
+          <div className="md:w-1/2 space-y-4 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
               Chat with strangers without a Hitch
             </h1>
@@ -35,7 +35,7 @@ export default function Home() {
             </form>
           </div>
 
-          <div className="md:w-1/3 mt-20 md:mx-20 md:mt-0 md:ml-10">
+          <div className="md:w-1/2 mt-20 md:mx-20 md:mt-0 md:ml-10">
             <Image
               src="/heroImageIllustration.png"
               alt="hero"
