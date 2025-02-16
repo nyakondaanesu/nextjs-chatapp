@@ -34,7 +34,7 @@ export default function Home() {
                   alt="megaphone"
                   width={100}
                   height={100}
-                  className="ml-2 md:ml-3 w-10 md:w-20"
+                  className="ml-5 md:ml-5 w-10 md:w-32"
                 />
               </span>
               with strangers without a hitch
