@@ -82,7 +82,7 @@ const MatchMakingSection = () => {
   }, [socket]); // Re-run effect if socket changes
 
   return (
-    <div className="flex justify-center items-center h-dvh">
+    <div className="flex justify-center items-center h-dvh bg-main">
       {!isMatched && (
         <div className="flex text-center flex-col items-center space-y-2">
           <h6

@@ -73,7 +73,7 @@ export default function Messages() {
   return (
     <>
       <>
-        <div className="flex-col flex h-[calc(100vh-9rem)] overflow-y-auto space-y-8 px-4">
+        <div className="flex-col flex h-[calc(100vh-9rem)] overflow-y-auto space-y-8 px-4 bg-main">
           {messageReceived?.map((message, index) => {
             const isSentByUser = message.fromId === userID;
 

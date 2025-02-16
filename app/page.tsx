@@ -4,11 +4,11 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="w-full h-screen flex-col md:flex items-center justify-center">
+    <div className="w-full h-screen flex-col md:flex items-center justify-center bg-white">
       <nav>
         <Image src="/newLogo.png" alt="logo" width={100} height={100} />
       </nav>
-      <section className="md:flex flex-col items-center justify-center mt-10">
+      <section className="md:flex flex-col items-center  mt-10">
         <div className="flex-col w-1/3">
           <h1 className="text-5xl font-bold">
             Chat with strangers without a Hitch

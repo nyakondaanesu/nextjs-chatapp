@@ -221,7 +221,7 @@ const Video = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen items-center justify-center">
+    <div className="flex flex-col h-screen items-center justify-center bg-main">
       {!matchedUser ? (
         <div className="flex text-center flex-col items-center space-y-2">
           <h1
