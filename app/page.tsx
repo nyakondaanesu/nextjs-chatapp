@@ -22,8 +22,8 @@ export default function Home() {
                 <Image
                   src="/handDrawn.png"
                   alt="logo"
-                  width={200}
-                  height={200}
+                  width={400}
+                  height={400}
                   className="absolute -top-3 -left-3"
                 />
               </span>{" "}
@@ -35,7 +35,7 @@ export default function Home() {
               real-time.
             </h3>
 
-            <form action={handleSignIn}>
+            <form action={handleSignIn} className="mt-10">
               <button
                 className="flex items-center gap-3 border-2 border-zinc-800 text-black rounded-lg px-6 py-2 hover:bg-gray-100 transition mt-10"
                 type="submit"
@@ -73,7 +73,7 @@ export default function Home() {
 
             <Link
               href={"/terms"}
-              className="font-light text-xs underline  text-black"
+              className="font-light text-xs underline pr-3  text-black"
             >
               {" "}
               Privacy Policy
