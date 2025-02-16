@@ -18,16 +18,16 @@ export default function Home() {
           <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
               <svg
-                width="100"
+                width="50"
                 height="50"
-                viewBox="0 0 100 50"
+                viewBox="0 0 50 50"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M5 30 C20 10, 40 50, 60 30 C80 10, 95 50, 100 30"
+                  d="M10 10 Q15 0, 20 10 T30 10 T40 10"
                   stroke="black"
-                  stroke-width="3"
+                  stroke-width="2"
                   fill="none"
                   stroke-linecap="round"
                 />
