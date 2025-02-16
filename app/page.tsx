@@ -16,15 +16,14 @@ export default function Home() {
 
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
           <div className="md:w-1/2  mt-3  md:text-left">
-            <h1 className="relative text-4xl md:text-6xl font-bold text-black">
-              <span className="relative inline-block">
+            <h1 className=" text-4xl md:text-8xl font-bold text-black">
+              <span className="flex">
                 chat
                 <Image
-                  src="/decorative.png"
+                  src="/megaPhone.png"
                   alt="hand-drawn circle"
-                  width={800} // Adjust width for better scaling
-                  height={800}
-                  className="absolute -top-8 left-1/2 translate-x-5 w-16 opacity-80"
+                  width={100} // Adjust width for better scaling
+                  height={100}
                 />
               </span>{" "}
               with strangers without a hitch
@@ -46,12 +45,19 @@ export default function Home() {
             </form>
           </div>
 
-          <div className="md:w-1/2 mt-20 md:mx-20 md:mt-0 md:ml-10">
+          <div className="relative md:w-1/2 mt-20 md:mx-20 md:mt-0 md:ml-10">
+            <Image
+              src="/stars.png"
+              alt="stars"
+              width={100}
+              height={100}
+              className="absolute top-0 left-0 z-100"
+            />
             <Image
               src="/heroImageIllustration.png"
               alt="hero"
-              width={700}
-              height={700}
+              width={800}
+              height={800}
               className="md:mx-10"
             />
           </div>
