@@ -16,10 +16,30 @@ export default function Home() {
 
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
           <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
-            <h1 className="text-4xl md:text-6xl font-bold text-black">
-              chat with{" "}
+            <h1 className="relative text-4xl md:text-6xl font-bold text-black">
+              <span className="relative inline-block">
+                chat
+                {/* Hand-drawn circle */}
+                <svg
+                  className="absolute -top-3 -left-3 w-28 h-20"
+                  viewBox="0 0 100 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 30 Q5 10, 30 5 T70 10 T95 30 T70 50 T30 55 T10 30 Z"
+                    stroke="black"
+                    stroke-width="3"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              with{" "}
               <span className="relative inline-block pr-6">
                 strangers
+                {/* Squiggly line */}
                 <svg
                   className="absolute -top-5 right-0 w-14 h-14"
                   viewBox="0 0 60 60"
@@ -39,6 +59,7 @@ export default function Home() {
               </span>{" "}
               without a hitch
             </h1>
+
             <h3 className="text-sm font-light text-black mt-5">
               Meet new people, start conversations, and make connections—all in
               real-time.
