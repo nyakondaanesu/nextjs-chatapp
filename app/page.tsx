@@ -17,24 +17,28 @@ export default function Home() {
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
           <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
-              <svg
-                width="60"
-                height="60"
-                viewBox="0 0 60 60"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g transform="rotate(70, 30, 30)">
-                  <path
-                    d="M10 40 Q15 10, 20 30 T30 35 T40 30 T50 40"
-                    stroke="black"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                  />
-                </g>
-              </svg>
-              Chat with strangers without a Hitch
+              Chat with{" "}
+              <span>
+                strangers
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 60 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g transform="rotate(70, 30, 30)">
+                    <path
+                      d="M10 40 Q15 10, 20 30 T30 35 T40 30 T50 40"
+                      stroke="black"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                    />
+                  </g>
+                </svg>
+              </span>{" "}
+              without a Hitch
             </h1>
             <h3 className="text-sm font-light text-black mt-5">
               Meet new people, start conversations, and make connections—all in
