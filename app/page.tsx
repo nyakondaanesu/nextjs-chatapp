@@ -8,7 +8,7 @@ export default function Home() {
       <nav>
         <Image src="/newLogo.png" alt="logo" width={100} height={100} />
       </nav>
-      <section className="md:flex flex-col items-center  mt-10">
+      <div className="md:flex mt-10">
         <div className="flex-col w-1/3">
           <h1 className="text-5xl font-bold text-black">
             Chat with strangers without a Hitch
@@ -24,7 +24,10 @@ export default function Home() {
               await signIn("google", { redirectTo: "/chat" });
             }}
           >
-            <button className="button" type="submit">
+            <button
+              className="button border-2 border-zinc text-black rounded-lg px-4 py-2"
+              type="submit"
+            >
               Continue with Google
             </button>
           </form>
@@ -32,7 +35,7 @@ export default function Home() {
         <div className="w-2/3">
           <Image src="/heroImage.png" alt="hero" width={500} height={500} />
         </div>
-      </section>
+      </div>
     </div>
   );
 }
