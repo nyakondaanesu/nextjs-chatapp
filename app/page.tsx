@@ -4,16 +4,16 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="w-full h-screen flex-col md:flex items-center justify-center bg-white">
+    <div className="w-full h-screen md:flex items-center  bg-white">
       <nav>
         <Image src="/newLogo.png" alt="logo" width={100} height={100} />
       </nav>
       <section className="md:flex flex-col items-center  mt-10">
         <div className="flex-col w-1/3">
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-5xl font-bold text-black">
             Chat with strangers without a Hitch
           </h1>
-          <h3 className="mt-4 font-thin">
+          <h3 className="mt-4 font-thin text-black">
             Meet new people, start conversations, and make connections—all in
             real time
           </h3>
