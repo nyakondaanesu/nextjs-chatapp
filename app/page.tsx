@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="bg-white">
       <main className="w-full h-screen bg-white flex flex-col">
-        <header className="mx-2 md:mx-5">
+        <header className="mx-2 mt-5 md:mx-5">
           <Image src="/logoNew.png" alt="logo" width={100} height={100} />
         </header>
 
@@ -22,11 +22,11 @@ export default function Home() {
                 <Image
                   src="/handDrawn.png"
                   alt="logo"
-                  width={100}
-                  height={100}
+                  width={200}
+                  height={200}
                   className="absolute -top-3 -left-3"
                 />
-              </span>
+              </span>{" "}
               with strangers without a hitch
             </h1>
 
@@ -66,14 +66,14 @@ export default function Home() {
           <div className="flex space-x-3">
             <Link
               href={"/terms"}
-              className="font-light text-xs underline pr-10 text-black"
+              className="font-light text-xs underline text-black"
             >
               Terms and conditions
             </Link>
 
             <Link
               href={"/terms"}
-              className="font-light text-xs underline pr-10 text-black"
+              className="font-light text-xs underline  text-black"
             >
               {" "}
               Privacy Policy
