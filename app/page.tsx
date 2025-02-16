@@ -25,15 +25,15 @@ export default function Home() {
         {/* Main Section */}
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-4 md:px-12">
           {/* Left Content */}
-          <div className="md:w-1/2 mt-5 md:mt-0 text-center md:text-left max-w-[90%] md:max-w-none">
+          <div className="md:w-1/2 mt-5 md:mt-0  md:text-left max-w-[90%] md:max-w-none">
             <h1 className="text-4xl md:text-7xl font-bold text-black leading-tight">
               <span className="flex justify-center md:justify-start items-center">
                 chat
                 <Image
                   src="/megaPhone.png"
                   alt="megaphone"
-                  width={60}
-                  height={60}
+                  width={100}
+                  height={100}
                   className="ml-2 md:ml-3 w-10 md:w-14"
                 />
               </span>
