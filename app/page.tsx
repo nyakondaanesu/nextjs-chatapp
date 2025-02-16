@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <main className="w-full h-screen bg-white flex flex-col">
-        <header className="p-4 mx-3 md:mx-5">
+        <header className="p-4 mx-2 md:mx-5">
           <Image src="/logoNew.png" alt="logo" width={100} height={100} />
         </header>
 
@@ -48,8 +48,8 @@ export default function Home() {
       </main>
       <footer className="mx-25 mb-6 bg-white">
         <hr className="md:mx-5 mt-10 border-zinc-300 " />
-        <div className="flex justify-between mt-10">
-          <p className="font-light text-xs md:mx-28  text-black">
+        <div className="flex justify-between">
+          <p className="font-light text-xs md:mx-2  text-black">
             &copy;{new Date().getFullYear()} Anesu Nyakonda
           </p>
           <div className="flex space-x-3">
