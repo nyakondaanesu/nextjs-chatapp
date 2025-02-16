@@ -15,22 +15,22 @@ export default function Home() {
         </header>
 
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
-          <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
+          <div className="md:w-1/2  mt-3  md:text-left">
             <h1 className="relative text-4xl md:text-6xl font-bold text-black">
               <span className="relative inline-block">
                 chat
                 <Image
                   src="/handDrawn.png"
                   alt="logo"
-                  width={400}
-                  height={400}
+                  width={800}
+                  height={800}
                   className="absolute -top-3 -left-3"
                 />
               </span>{" "}
               with strangers without a hitch
             </h1>
 
-            <h3 className="text-sm font-light text-black mt-5">
+            <h3 className="text-sm font-light text-black mt-3">
               Meet new people, start conversations, and make connections—all in
               real-time.
             </h3>
