@@ -9,21 +9,21 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen bg-white flex flex-col">
-      <header className="p-4">
+      <header className="p-4 mx-5">
         <Image src="/logoNew.png" alt="logo" width={100} height={100} />
       </header>
 
       <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
-        <div className="md:w-1/3 space-y-4 text-center md:text-left">
-          <h1 className="text-5xl font-bold text-black">
+        <div className="md:w-1/2 space-y-4 text-center md:text-left">
+          <h1 className="text-3xl md:text-5xl font-bold text-black">
             Chat with strangers without a Hitch
           </h1>
-          <h3 className="text-lg font-light text-black">
+          <h3 className="text-sm font-light text-black">
             Meet new people, start conversations, and make connections—all in
             real-time.
           </h3>
 
-          <form action={handleSignIn} className="mt-4">
+          <form action={handleSignIn} className="mt-10">
             <button
               className="flex items-center gap-3 border-2 border-zinc-800 text-black rounded-lg px-6 py-2 hover:bg-gray-100 transition"
               type="submit"
@@ -34,8 +34,13 @@ export default function Home() {
           </form>
         </div>
 
-        <div className="md:w-2/3 mt-10 md:mt-0 md:ml-10">
-          <Image src="/heroImage.png" alt="hero" width={750} height={750} />
+        <div className="md:w-1/2 mt-10 md:mt-0 md:ml-10">
+          <Image
+            src="/heroImageIllustration.png"
+            alt="hero"
+            width={650}
+            height={650}
+          />
         </div>
       </section>
       <footer className="mx-2 bg-whit mt-10 mb-2">
