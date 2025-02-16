@@ -22,8 +22,8 @@ export default function Home() {
                 <Image
                   src="/yelloHandDrawn.png"
                   alt="hand-drawn circle"
-                  width={200} // Adjust width for better scaling
-                  height={200}
+                  width={800} // Adjust width for better scaling
+                  height={800}
                   className="absolute -top-4 -left-5 w-[120%] h-auto md:w-[140%] md:-top-6 md:-left-6 object-contain"
                 />
               </span>{" "}
@@ -41,7 +41,7 @@ export default function Home() {
                 type="submit"
               >
                 <Image src="/google.png" alt="Google" width={20} height={20} />
-                Continue with Google
+                CONTINUE WITH GOOGLE
               </button>
             </form>
           </div>
