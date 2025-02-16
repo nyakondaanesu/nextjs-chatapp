@@ -22,9 +22,9 @@ export default function Home() {
                 <Image
                   src="/handDrawn.png"
                   alt="logo"
-                  width={800}
-                  height={800}
-                  className="absolute -top-3 -left-3"
+                  width={2000}
+                  height={2000}
+                  className="absolute -top-3 -left-3 bg-yellow-500"
                 />
               </span>{" "}
               with strangers without a hitch
