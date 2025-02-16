@@ -262,7 +262,7 @@ const Video = () => {
             muted
             className="w-1/4 bg-black rounded-lg min-h-[150px] object-cover fixed top-5 right-5 z-[100] border-2 border-green-500"
           />
-          <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100] bg-zinc-700 rounded-lg p-4">
+          <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex gap-4 z-[100] bg-zinc-700 rounded-full py-4 px-10">
             <button className="bg-red-700 rounded-full p-2" onClick={onCallEnd}>
               <Image src="/callEnd.png" width={30} height={30} alt="call-end" />
             </button>

@@ -83,7 +83,11 @@ const AppSideBar = ({ children }: { children: React.ReactNode }) => {
       <SidebarProvider>
         <button
           onClick={toggleSidebar}
-          className="fixed top-10 left z-[100] text-white rounded-md "
+          className={
+            isSideOpen
+              ? `fixed top-10 left z-[100] text-white rounded-md`
+              : `fixed top-5 left z-[100] text-white rounded-md`
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
