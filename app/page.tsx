@@ -17,12 +17,12 @@ export default function Home() {
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
           <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
-              Chat with{" "}
-              <span>
+              chat with
+              <span className="relative inline-block">
+                {" "}
                 strangers
                 <svg
-                  width="60"
-                  height="60"
+                  className="absolute -top-5 left-1/2 -translate-x-1/2 w-14 h-14"
                   viewBox="0 0 60 60"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ export default function Home() {
                   </g>
                 </svg>
               </span>{" "}
-              without a Hitch
+              without a hitch
             </h1>
             <h3 className="text-sm font-light text-black mt-5">
               Meet new people, start conversations, and make connections—all in
