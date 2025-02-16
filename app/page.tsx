@@ -14,7 +14,7 @@ export default function Home() {
       </header>
 
       <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
-        <div className="md:w-[40%] space-y-4 text-center md:text-left">
+        <div className="md:w-[40%] space-y-4 mt-10  md:text-left">
           <h1 className="text-5xl md:text-7xl font-bold text-black">
             Chat with strangers without a Hitch
           </h1>
@@ -34,17 +34,17 @@ export default function Home() {
           </form>
         </div>
 
-        <div className="md:w-[60%] mt-20 md:mt-0 md:ml-10">
+        <div className="md:w-[60%] mt-20 md:mx-10 md:mt-0 md:ml-10">
           <Image
             src="/heroImageIllustration.png"
             alt="hero"
-            width={650}
-            height={650}
+            width={700}
+            height={700}
           />
         </div>
       </section>
-      <footer className="mx-2  mt-10 mb-2">
-        <hr className="md:mx-25 mt-10 border-zinc-300 " />
+      <footer className="mx-25  mt-10 mb-6">
+        <hr className="md:mx-5 mt-10 border-zinc-300 " />
         <div className="flex justify-between mt-10">
           <p className="font-light text-xs md:mx-28  text-black">
             &copy;{new Date().getFullYear()} Anesu Nyakonda
