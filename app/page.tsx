@@ -18,19 +18,21 @@ export default function Home() {
           <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
               <svg
-                width="50"
-                height="50"
-                viewBox="0 0 50 50"
+                width="60"
+                height="60"
+                viewBox="0 0 60 60"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M10 10 Q15 0, 20 10 T30 10 T40 10"
-                  stroke="black"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                />
+                <g transform="rotate(70, 30, 30)">
+                  <path
+                    d="M10 40 Q15 10, 20 30 T30 35 T40 30 T50 40"
+                    stroke="black"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                </g>
               </svg>
               Chat with strangers without a Hitch
             </h1>
