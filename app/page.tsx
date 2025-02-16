@@ -20,11 +20,11 @@ export default function Home() {
               <span className="relative inline-block">
                 chat
                 <Image
-                  src="/handDrawn.png"
-                  alt="logo"
-                  width={2000}
-                  height={2000}
-                  className="absolute -top-3 -left-3 bg-yellow-500"
+                  src="/yelloHandDrawn.png"
+                  alt="hand-drawn circle"
+                  width={200} // Adjust width for better scaling
+                  height={200}
+                  className="absolute -top-4 -left-5 w-[120%] h-auto md:w-[140%] md:-top-6 md:-left-6 object-contain"
                 />
               </span>{" "}
               with strangers without a hitch
