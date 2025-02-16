@@ -19,45 +19,15 @@ export default function Home() {
             <h1 className="relative text-4xl md:text-6xl font-bold text-black">
               <span className="relative inline-block">
                 chat
-                {/* Hand-drawn circle */}
-                <svg
-                  className="absolute -top-3 -left-3 w-28 h-20"
-                  viewBox="0 0 100 60"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 30 Q5 10, 30 5 T70 10 T95 30 T70 50 T30 55 T10 30 Z"
-                    stroke="black"
-                    stroke-width="3"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+                <Image
+                  src="/handDrawn.png"
+                  alt="logo"
+                  width={100}
+                  height={100}
+                  className="absolute -top-3 -left-3"
+                />
               </span>
-              with{" "}
-              <span className="relative inline-block pr-6">
-                strangers
-                {/* Squiggly line */}
-                <svg
-                  className="absolute -top-5 right-0 w-14 h-14"
-                  viewBox="0 0 60 60"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g transform="rotate(70, 30, 30)">
-                    <path
-                      d="M10 40 Q15 10, 20 30 T30 35 T40 30 T50 40"
-                      stroke="black"
-                      stroke-width="2"
-                      fill="none"
-                      stroke-linecap="round"
-                    />
-                  </g>
-                </svg>
-              </span>{" "}
-              without a hitch
+              with strangers without a hitch
             </h1>
 
             <h3 className="text-sm font-light text-black mt-5">
