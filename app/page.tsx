@@ -20,7 +20,7 @@ export default function Home() {
               <span className="relative inline-block">
                 chat
                 <Image
-                  src="/yelloHandDrawn.png"
+                  src="/redCircle.png"
                   alt="hand-drawn circle"
                   width={800} // Adjust width for better scaling
                   height={800}
