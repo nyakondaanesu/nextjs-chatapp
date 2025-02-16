@@ -17,12 +17,11 @@ export default function Home() {
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
           <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
-              chat with
-              <span className="relative inline-block">
-                {" "}
+              chat with{" "}
+              <span className="relative inline-block pr-6">
                 strangers
                 <svg
-                  className="absolute -top-5 left-1/2 -translate-x-1/2 w-14 h-14"
+                  className="absolute -top-5 right-0 w-14 h-14"
                   viewBox="0 0 60 60"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
