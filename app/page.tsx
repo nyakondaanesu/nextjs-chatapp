@@ -15,7 +15,7 @@ export default function Home() {
         </header>
 
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
-          <div className="md:w-[40%] space-y-4 mt-10  md:text-left">
+          <div className="md:w-[40%] space-y-4 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
               Chat with strangers without a Hitch
             </h1>
@@ -41,6 +41,7 @@ export default function Home() {
               alt="hero"
               width={700}
               height={700}
+              className="md:mx-10"
             />
           </div>
         </section>
