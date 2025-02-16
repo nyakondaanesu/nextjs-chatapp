@@ -10,13 +10,28 @@ export default function Home() {
   return (
     <div className="bg-white">
       <main className="w-full h-screen bg-white flex flex-col">
-        <header className="p-4 mx-2 md:mx-5">
+        <header className="mx-2 md:mx-5">
           <Image src="/logoNew.png" alt="logo" width={100} height={100} />
         </header>
 
         <section className="flex flex-col md:flex-row items-center justify-center flex-grow px-6 md:px-12">
-          <div className="md:w-1/2 space-y-4 mt-3  md:text-left">
+          <div className="md:w-1/2 space-y-6 mt-3  md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-black">
+              <svg
+                width="100"
+                height="50"
+                viewBox="0 0 100 50"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 30 C20 10, 40 50, 60 30 C80 10, 95 50, 100 30"
+                  stroke="black"
+                  stroke-width="3"
+                  fill="none"
+                  stroke-linecap="round"
+                />
+              </svg>
               Chat with strangers without a Hitch
             </h1>
             <h3 className="text-sm font-light text-black mt-5">
@@ -48,7 +63,7 @@ export default function Home() {
       </main>
       <footer className="mx-25 mb-6 bg-white">
         <hr className="md:mx-5 mt-10 border-zinc-300 " />
-        <div className="flex justify-between mt-10">
+        <div className="flex justify-between mt-10 mb-5 md:mx-5">
           <p className="font-light text-xs md:mx-2  text-black">
             &copy;{new Date().getFullYear()} Anesu Nyakonda
           </p>
