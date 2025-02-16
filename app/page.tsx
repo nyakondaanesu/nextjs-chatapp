@@ -45,7 +45,10 @@ export default function Home() {
               real-time.
             </h3>
 
-            <form action={handleSignIn} className="mt-10">
+            <form
+              action={handleSignIn}
+              className="mt-10 justify-center md:justify-start"
+            >
               <button
                 className="flex items-center justify-center gap-3 border-2 border-zinc-800 text-black rounded-lg px-6 py-2 hover:bg-gray-100 transition"
                 type="submit"
